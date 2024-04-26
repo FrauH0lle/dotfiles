@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+depends=(
+   base
+   shell/bash
+   shell/zsh
+   # shell/tools
+   desktop/plasma
+   desktop/apps/calibre
+   desktop/apps/libreoffice
+   desktop/fonts
+   desktop/spelling
+   editors/emacs
+   hardware/hp-printer
+   dev/R
+   dev/rust
+   dev/containers
+   services/samba
+   vm/virtualbox
+   browsers/vivaldi
+   backup/snapper
+)
+
+packages=( dotdeploy/host-kallisto )
+
+module_configure() {
+   # Enable fstrim
+   sudo systemctl enable fstrim.timer
+}

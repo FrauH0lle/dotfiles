@@ -1,0 +1,38 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/base" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Files
+[files]
+# Package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Local repository
+[files."/var/db/repos/local/*"]
+source = "$DOD_ROOT/packages/gentoo/overlay/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[files."/etc/portage/repos.conf/localrepo.conf"]
+source = "$DOD_ROOT/packages/gentoo/localrepo.conf"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[files."/etc/portage/package.accept_keywords/localrepo"]
+source = "$DOD_ROOT/packages/gentoo/localrepo.keywords"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Actions
+# Necessary base setup
+[[actions.setup.pre]]
+exec = "$DOD_ROOT/scripts/gentoo_base_setup.sh"
+# exec_file = true

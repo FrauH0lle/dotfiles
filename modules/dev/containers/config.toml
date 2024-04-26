@@ -1,0 +1,38 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/dev-containers" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[[packages]]
+install = [ "dotdeploy-dev-containers" ]
+eval_when = "(eq DOD_DISTRO 'ubuntu')"
+
+# Files
+[files]
+# Package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Actions
+[[actions.setup.main]]
+exec = "$DOD_ROOT/scripts/ensure_ppa.sh michel-slm/distrobox"
+# args = [ "michel-slm/distrobox" ]
+# exec_file = true
+eval_when = "(eq DOD_DISTRO 'ubuntu')"
+
+# Deploy
+[[actions.config.main]]
+exec = """
+# Set subuid and subgid
+sudo touch /etc/subuid /etc/subgid
+sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$USER"
+"""
+
+# Remove
+[[actions.remove.post]]
+exec = """
+sudo usermod --del-subuids 100000-165535 --del-subgids 100000-165535 "$USER"
+"""

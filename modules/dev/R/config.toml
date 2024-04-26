@@ -1,0 +1,23 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/dev-R" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[[packages]]
+install = [ "dotdeploy-dev-r" ]
+eval_when = "(eq DOD_DISTRO 'ubuntu')"
+
+# Files
+[files]
+# Package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[files."$HOME/*"]
+source = "common/home/*"
+phase = "config"
+action = "copy"
+template = true

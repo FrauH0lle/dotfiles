@@ -1,0 +1,23 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/hardware-hp-printer" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Files
+[files]
+# Package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Actions
+[[actions.config.main]]
+exec = """
+sudo systemctl enable --now cups.socket
+
+sudo gpasswd -a "$USER" lp
+sudo gpasswd -a "$USER" lpadmin
+sudo gpasswd -a "$USER" scanner
+"""

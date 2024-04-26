@@ -1,0 +1,35 @@
+depends = [ "shell/common" ]
+
+# Packages
+[[packages]]
+install = [ "dotdeploy/shell-zsh" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Files
+[files]
+# Package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[files."$HOME/*"]
+source = "common/home/*"
+phase = "config"
+action = "link"
+
+# Actions
+[[actions.config.main]]
+exec = "$DOD_ROOT/scripts/ensure_repo.sh https://github.com/zdharma-continuum/zinit.git ~/.config/zsh/.zinit/bin"
+# args = [ "https://github.com/zdharma-continuum/zinit.git", "~/.config/zsh/.zinit/bin" ]
+# exec_file = true
+
+[[actions.config.main]]
+exec = "$DOD_ROOT/scripts/ensure_repo.sh https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell"
+# args = [ "https://github.com/chriskempson/base16-shell.git", "~/.config/base16-shell" ]
+# exec_file = true
+
+# Actions
+[[actions.config.main]]
+exec = """ln -svf "$HOME"/.zshenv "$HOME"/.config/zsh/.zshenv"""

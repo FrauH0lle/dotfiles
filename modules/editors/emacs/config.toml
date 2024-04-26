@@ -1,0 +1,39 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/editors-emacs" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[[packages]]
+install = [ "dotdeploy-editors-emacs" ]
+eval_when = "(eq DOD_DISTRO 'ubuntu')"
+
+# Files
+[files]
+# Package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[files."$HOME/*"]
+source = "common/home/*"
+phase = "config"
+action = "link"
+
+# Actions
+[[actions.setup.main]]
+exec = "$DOD_ROOT/scripts/ensure_ppa.sh ubuntuhandbook1/emacs"
+# args = [ "ubuntuhandbook1/emacs" ]
+# exec_file = true
+eval_when = "(eq DOD_DISTRO 'ubuntu')"
+
+[[actions.config.main]]
+exec = "$DOD_ROOT/scripts/ensure_repo.sh git@github.com:FrauH0lle/emacs.d.git ~/.emacs.d"
+# args = [ "git@github.com:FrauH0lle/emacs.d.git", "~/.emacs.d" ]
+# exec_file = true
+
+[[messages]]
+message = """
+Remember to install the emacs configuration via 'emacs-config deploy'.
+"""

@@ -1,0 +1,45 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/desktop-plasma" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Files
+[files]
+# Package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[files."/etc/etc/polkit-1/rules.d/49-wheel.rules"]
+source = "49-wheel.rules"
+phase = "config"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Actions
+# Deployment
+[[actions.config.main]]
+exec = """
+# Activate pipewire
+systemctl --user enable --now pipewire.socket pipewire-pulse.socket wireplumber.service
+"""
+
+[[actions.config.main]]
+exec = """
+# Add Flathub repo
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+"""
+
+# Removal
+[[actions.remove.pre]]
+exec = """
+systemctl --user disable --now pipewire.socket pipewire-pulse.socket wireplumber.service
+"""
+
+[[actions.remove.pre]]
+exec = """
+# Add Flathub repo
+sudo flatpak remote-delete flathub
+"""

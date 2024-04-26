@@ -1,0 +1,8 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/shell-common" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[[packages]]
+install = [ "dotdeploy-shell-common" ]
+eval_when = "(eq DOD_DISTRO 'ubuntu')"

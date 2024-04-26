@@ -1,0 +1,65 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/services-samba" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Files
+[files]
+# Package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+[files."/etc/*"]
+source = "gentoo/samba_config/etc/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Deploy
+[[actions.config.main]]
+exec = """
+# Activate sysusers
+sudo systemd-sysusers
+
+# Add user to Samba usershare group
+sudo gpasswd -a "$USER" sambashares
+
+sudo systemctl enable smb
+sudo systemctl enable wsdd
+"""
+
+# Remove
+[[actions.remove.pre]]
+exec = """
+sudo systemctl disable --now smb
+sudo systemctl disable --now wsdd
+"""
+
+[[actions.remove.post]]
+exec = """
+sudo gpasswd -d "$USER" sambashares
+sudo systemd-sysusers
+"""
+
+[[messages]]
+message = """
+Manage Samba authentication for named users:
+
+# Add the some_user account to the Samba login db
+sudo smbpasswd -a some_user
+
+# Enable the some_user account in the Samba login db
+sudo smbpasswd -e some_user
+
+# Try to log in to a running Samba instance as some_user and list shares
+smbclient -U some_user -L localhost
+
+# Disable the some_user account in the Samba login db
+sudo smbpasswd -d some_user
+
+# Remove the some_user account from the Samba login db
+sudo smbpasswd -x some_user
+"""

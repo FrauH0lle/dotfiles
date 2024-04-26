@@ -1,0 +1,21 @@
+depends = [ "shell/common" ]
+
+# Packages
+[[packages]]
+install = [ "dotdeploy/shell-bash" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Files
+[files]
+# Host portage and package configuration
+[files."/etc/portage/*"]
+source = "gentoo/portage/*"
+phase = "setup"
+action = "copy"
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+
+# Host specific dotfiles
+[files."$HOME/*"]
+source = "common/home/*"
+phase = "config"
+action = "link"

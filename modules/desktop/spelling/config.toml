@@ -1,0 +1,4 @@
+# Packages
+[[packages]]
+install = [ "dotdeploy/desktop-spelling" ]
+eval_when = "(eq DOD_DISTRO 'gentoo')"
