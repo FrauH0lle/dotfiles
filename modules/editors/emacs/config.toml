@@ -23,12 +23,12 @@ action = "link"
 
 # Actions
 [[actions.setup.main]]
-exec = "$DOD_ROOT/scripts/ensure_ppa.sh ubuntuhandbook1/emacs"
-# args = [ "ubuntuhandbook1/emacs" ]
-# exec_file = true
+exec = "$DOD_ROOT/scripts/ensure_ppa.sh"
+args = [ "ubuntuhandbook1/emacs" ]
+exec_file = true
 eval_when = "(eq DOD_DISTRO 'ubuntu')"
 
-[[actions.config.main]]
+[[actions.config.pre]]
 exec = "$DOD_ROOT/scripts/ensure_repo.sh git@github.com:FrauH0lle/emacs.d.git ~/.emacs.d"
 # args = [ "git@github.com:FrauH0lle/emacs.d.git", "~/.emacs.d" ]
 # exec_file = true
