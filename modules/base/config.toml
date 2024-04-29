@@ -35,4 +35,10 @@ eval_when = "(eq DOD_DISTRO 'gentoo')"
 # Necessary base setup
 [[actions.setup.pre]]
 exec = "$DOD_ROOT/scripts/gentoo_base_setup.sh"
-# exec_file = true
+eval_when = "(eq DOD_DISTRO 'gentoo')"
+exec_file = true
+
+[[actions.setup.pre]]
+exec = "$DOD_ROOT/scripts/prepare_system.sh"
+eval_when = "(eq DOD_DISTRO 'ubuntu')"
+exec_file = true
