@@ -17,7 +17,7 @@ RDEPEND="
 # LTS Kernel
 RDEPEND="
 	${RDEPEND}
-	=sys-kernel/gentoo-kernel-bin-6.1*
+	=sys-kernel/gentoo-kernel-bin-6.6*
 "
 
 # Cron daemon
