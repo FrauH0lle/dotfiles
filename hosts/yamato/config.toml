@@ -46,10 +46,10 @@ source = "home/*"
 phase = "config"
 action = "link"
 
-[files."/test_foo.txt"]
-content = "hello"
-phase = "setup"
-action = "create"
+# [files."/test_foo.txt"]
+# content = "hello"
+# phase = "setup"
+# action = "create"
 
 
 # Files to generate
