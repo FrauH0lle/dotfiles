@@ -12,4 +12,5 @@ RDEPEND="
 	app-containers/podman
 	app-containers/podman-compose
 	app-containers/distrobox
+    app-containers/devcontainer
 "
