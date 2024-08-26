@@ -38,7 +38,7 @@
 ;;; Dotfiles
 
 ;; Ignore this directory in `+emacs-lisp-disable-flycheck-in-dirs'. Relevant if
-;; the configuration in `+emacs-private-dir' is symlinked
+;; the configuration in `zenit-local-conf-dir' is symlinked
 (after! flycheck
   (cl-pushnew (directory-file-name (file-name-directory (file-truename (concat zenit-local-conf-dir "config.el"))))
               +emacs-lisp-disable-flycheck-in-dirs :test #'equal))
