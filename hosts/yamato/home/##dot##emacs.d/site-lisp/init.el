@@ -4,17 +4,19 @@
 
  :completion
  vertico
- ;; company
  (corfu +icons)
 
  :ui
  doom-dashboard
  doom-theming
  hl-todo
+ indent-guides
+ (ligatures +extra)
  modeline
+ nav-flash
  popup
- vc-gutter
- ;; workspaces
+ (vc-gutter +pretty)
+ workspaces
  ;; zen
 
  :checkers
@@ -24,37 +26,39 @@
 
  :editor
  evil
- format
- word-wrap
- multiple-cursors
- fold
- rotate-text
  file-templates
+ fold
+ (format +lsp)
+ multiple-cursors
+ rotate-text
+ snippets
+ word-wrap
 
  :emacs
  electric
+ eshell
  undo
- org
+ ;; org
+ (org
+  +dragndrop
+  +jupyter
+  ;; +pandoc
+  +pretty
+  +present)
  vc
 
  :tools
- tree-sitter
- magit
- arch-linux
- ;; copy-as-format
- ;; direnv
+ (eval +overlay)
+ (magit +forge)
+ direnv
  editorconfig
- (lsp)
  ;; pdf
 
- ;; :org
- ;; (org
- ;;  +dragndrop
- ;;  +present
- ;;  +tufte)
+ :os
+ gentoo
 
  :lang
- ;; ;; common-lisp
+ ;; common-lisp
  data
  emacs-lisp
  (ess +lsp)
@@ -62,13 +66,14 @@
  ;;  +fold
  ;;  +latexmk)
  markdown
- (python)
+ (python +lsp +tree-sitter +pyright)
  (rust +lsp +tree-sitter)
  (sh +lsp +tree-sitter)
- ;; (scheme
- ;;  +racket)
 
  :config
  (default +bindings +smartparens)
+ ;; (:if (not init-file-debug) compile)
  compile
  )
+
+

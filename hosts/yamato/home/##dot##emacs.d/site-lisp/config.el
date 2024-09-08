@@ -5,10 +5,13 @@
 
 ;; Set font
 (setq zenit-font (font-spec :family "PragmataPro Liga" :size 18 :weight 'regular)
-      zenit-variable-pitch-font "Merriweather")
+      ;; zenit-font (font-spec :family "Iosevka Comfy" :size 18 :weight 'regular)
+      zenit-serif-font (font-spec :family "Iosevka Comfy Wide Motion Duo")
+      zenit-variable-pitch-font (font-spec :family "Iosevka Comfy Wide Duo"))
 
 ;;; Set theme
 (setq zenit-theme 'doom-one)
+;; (setq zenit-theme 'modus-vivendi)
 
 
 ;;
@@ -32,20 +35,11 @@
   (setq langtool-java-classpath
         "/usr/share/languagetool:/usr/share/java/languagetool/*"))
 
+;; :checkers spell
+(after! jinx
+  (setq! jinx-languages "en_US de_DE"))
 
-;;
-;;; Dotfiles
-
-;; Ignore this directory in `+emacs-lisp-disable-flycheck-in-dirs'. Relevant if
-;; the configuration in `+emacs-private-dir' is symlinked
-(after! flycheck
-  (cl-pushnew (directory-file-name (file-name-directory (file-truename (concat zenit-local-conf-dir "config.el"))))
-              +emacs-lisp-disable-flycheck-in-dirs :test #'equal))
-
-;; Dotfiles _init template
-(when (modulep! :editor file-templates)
-  (defun +file-templates-in-dotfiles-dir-p (file)
-    "Returns t if FILE is in the Dotfiles directory."
-    (file-in-directory-p file "~/.dotfiles"))
-
-  (set-file-template! "_init" :when #'+file-templates-in-dotfiles-dir-p :trigger "__init" :mode 'sh-mode))
+;; (remove-hook! 'python-mode-local-vars-hook #'tree-sitter!)
+;; (remove-hook! 'python-mode-local-vars-hook #'tree-sitter!)
+;; (after! lsp-mode
+;;   (setq! lsp-disabled-clients '(python-mode . (ruff-lsp))))
