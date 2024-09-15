@@ -49,7 +49,7 @@ RDEPEND="
 	app-portage/smart-live-rebuild
 	app-portage/gentoolkit
 	app-portage/eix
-	app-portage/genlop
+	app-portage/emlop
 "
 
 # mold linker
