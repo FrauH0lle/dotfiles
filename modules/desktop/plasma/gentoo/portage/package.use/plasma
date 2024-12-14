@@ -15,6 +15,8 @@ net-misc/nextcloud-client dolphin
 kde-apps/kdeutils-meta 7zip cups gpg lrz rar
 # Do not integrate into UI, ark is enough
 app-arch/p7zip -kde
+# File formats for Okular
+kde-apps/okular markdown
 
 # openconnect
 kde-plasma/plasma-nm openconnect
