@@ -8,4 +8,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND="dev-lang/R"
+RDEPEND="
+    dev-lang/R
+    sci-libs/gdal
+    sci-libs/udunits
+"
