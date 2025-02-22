@@ -45,3 +45,10 @@ RDEPEND="
 	${RDEPEND}
 	sys-apps/xdg-desktop-portal-gtk
 "
+
+# Firefox
+RDEPEND="
+	${RDEPEND}
+	www-client/firefox-bin
+	net-misc/jdownloader2
+"
