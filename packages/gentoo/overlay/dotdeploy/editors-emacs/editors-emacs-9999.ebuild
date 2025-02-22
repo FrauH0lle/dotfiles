@@ -9,9 +9,8 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 # Emacs
-# XXX 2024-07-25: For now, we pin the version to 29.3
 RDEPEND="
-	=app-editors/emacs-29.3*
+	app-editors/emacs
 "
 # Faster greping
 RDEPEND="
