@@ -36,6 +36,12 @@ RDEPEND="
 	app-text/texlive
 "
 
+# :os gentoo
+RDEPEND="
+	${RDEPEND}
+	dev-util/pkgcheck
+"
+
 # :tools editorconfig
 RDEPEND="
 	${RDEPEND}

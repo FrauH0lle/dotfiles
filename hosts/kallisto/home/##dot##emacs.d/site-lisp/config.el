@@ -4,11 +4,14 @@
 ;;; UI
 
 ;; Set font
-(setq zenit-font (font-spec :family "FantasqueSansMono NF" :size 18 :weight 'regular)
-      zenit-variable-pitch-font (font-spec :family "Merriweather"))
+(setq zenit-font (font-spec :family "Iosevka Comfy" :size 18 :weight 'regular)
+      ;; zenit-serif-font (font-spec :family "InputSerifNarrow NF")
+      zenit-serif-font (font-spec :family "Iosevka Comfy Motion")
+      zenit-variable-pitch-font (font-spec :family "Iosevka Comfy Motion Duo"))
 
 ;;; Set theme
-(setq zenit-theme 'doom-one)
+;; (setq zenit-theme 'doom-one)
+(setq zenit-theme 'modus-operandi)
 
 
 ;;
@@ -31,21 +34,3 @@
 (after! langtool
   (setq langtool-java-classpath
         "/usr/share/languagetool:/usr/share/java/languagetool/*"))
-
-
-;;
-;;; Dotfiles
-
-;; Ignore this directory in `+emacs-lisp-disable-flycheck-in-dirs'. Relevant if
-;; the configuration in `zenit-local-conf-dir' is symlinked
-(after! flycheck
-  (cl-pushnew (directory-file-name (file-name-directory (file-truename (concat zenit-local-conf-dir "config.el"))))
-              +emacs-lisp-disable-flycheck-in-dirs :test #'equal))
-
-;; Dotfiles _init template
-(when (modulep! :editor file-templates)
-  (defun +file-templates-in-dotfiles-dir-p (file)
-    "Returns t if FILE is in the Dotfiles directory."
-    (file-in-directory-p file "~/.dotfiles"))
-
-  (set-file-template! "_init" :when #'+file-templates-in-dotfiles-dir-p :trigger "__init" :mode 'sh-mode))

@@ -4,16 +4,19 @@
 
  :completion
  vertico
- corfu
+ (corfu +icons)
 
  :ui
  doom-dashboard
  doom-theming
  hl-todo
+ indent-guides
  modeline
+ nav-flash
  popup
+ transient-state
  vc-gutter
- ;; workspaces
+ workspaces
  ;; zen
 
  :checkers
@@ -29,30 +32,27 @@
  fold
  rotate-text
  file-templates
+ snippets
 
  :emacs
- undo
+ eshell
  org
+ undo
  vc
 
+ :os
+ gentoo
+
  :tools
- tree-sitter
+ eval
+ llm
+ lookup
  magit
- arch-linux
- ;; copy-as-format
- ;; direnv
+ direnv
  editorconfig
- (lsp)
  ;; pdf
 
- ;; :org
- ;; (org
- ;;  +dragndrop
- ;;  +present
- ;;  +tufte)
-
  :lang
- ;; ;; common-lisp
  data
  emacs-lisp
  (ess +lsp)
@@ -60,12 +60,10 @@
  ;;  +fold
  ;;  +latexmk)
  markdown
- ;; (scheme
- ;;  +racket)
+ (python +pyright +tree-sitter)
  (rust +lsp +tree-sitter)
  (sh +lsp +tree-sitter)
 
  :config
  (default +bindings +smartparens)
- compile
- )
+ compile)

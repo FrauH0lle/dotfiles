@@ -49,13 +49,13 @@ RDEPEND="
 	app-portage/smart-live-rebuild
 	app-portage/gentoolkit
 	app-portage/eix
-	app-portage/emlop
+	app-portage/genlop
 "
 
 # mold linker
 RDEPEND="
 	${RDEPEND}
-    sys-devel/mold
+	sys-devel/mold
 "
 
 # System tools
