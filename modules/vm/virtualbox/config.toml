@@ -1,15 +1,16 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/vm-virtualbox" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Deploy
-[[actions.config.main]]
-exec = """
+[[tasks]]
+shell = """
 sudo gpasswd -a "$USER" vboxusers
 """
 
-[[actions.remove.post]]
-exec = """
+[[tasks]]
+shell = """
 sudo gpasswd -d "$USER" vboxusers
 """
+phase = "remove"

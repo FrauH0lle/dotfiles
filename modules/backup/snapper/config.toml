@@ -1,29 +1,31 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/backup-snapper" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Files
-[files]
-[files."/etc/portage/*"]
+[[files]]
 source = "gentoo/portage/*"
+target = "/etc/portage/*"
 phase = "setup"
 action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Deploy
-[[actions.config.main]]
-exec = """
+[[tasks]]
+shell = """
 sudo systemctl enable --now snapper-cleanup.timer snapper-timeline.timer
 sudo systemctl enable --now grub-btrfsd.service
 """
 
 # Remove
-[[actions.remove.pre]]
-exec = """
+[[tasks]]
+shell = """
 sudo systemctl disable --now snapper-cleanup.timer snapper-timeline.timer
 sudo systemctl disable --now grub-btrfsd.service
 """
+phase = "remove"
+hook = "pre"
 
 [[messages]]
 message = """

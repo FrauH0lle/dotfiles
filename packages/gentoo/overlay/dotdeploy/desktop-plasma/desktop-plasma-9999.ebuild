@@ -24,7 +24,7 @@ RDEPEND="
 	kde-apps/kdenetwork-filesharing
 	kde-apps/gwenview
 	kde-apps/okular
-	kde-apps/spectacle
+	kde-plasma/spectacle
 "
 
 # Evolution PIM

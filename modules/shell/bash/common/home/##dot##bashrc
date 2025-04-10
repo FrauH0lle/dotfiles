@@ -73,3 +73,4 @@ export PATH
 
 # Aliases
 [[ -f $HOME/.aliases.sh ]] && source "$HOME/.aliases.sh"
+. "$HOME/.cargo/env"

@@ -1,5 +1,7 @@
 ;; site-lisp/init.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
+(setenv "LSP_USE_PLISTS" "1")
+
 (modules!
 
  :completion
@@ -15,6 +17,7 @@
  modeline
  nav-flash
  popup
+ transient-state
  (vc-gutter +pretty)
  workspaces
  ;; zen
@@ -23,6 +26,7 @@
  grammar
  spell
  syntax
+ ;; (syntax +flymake)
 
  :editor
  evil
@@ -52,6 +56,11 @@
  (magit +forge)
  direnv
  editorconfig
+ llm
+ (lookup +dictionary +docsets)
+ ;; (lsp +eglot +lsp-flymake)
+ ;; lsp
+ (lsp +lsp-flymake)
  ;; pdf
 
  :os

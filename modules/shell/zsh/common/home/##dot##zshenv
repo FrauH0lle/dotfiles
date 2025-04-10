@@ -63,3 +63,4 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Envvars
 export EDITOR=nano
+. "$HOME/.cargo/env"

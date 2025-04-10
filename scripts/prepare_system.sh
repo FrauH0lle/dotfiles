@@ -6,7 +6,7 @@ source "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"/lib.sh
 # - Configure local repository
 # - Create directories
 
-case "$DOD_DISTRO" in
+case "$DOD_DISTRIBUTION_NAME" in
     gentoo)
         # Add GURU overlay
         # Make sure eselect-repository is installed

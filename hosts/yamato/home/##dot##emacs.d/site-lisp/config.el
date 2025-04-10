@@ -6,8 +6,8 @@
 ;; Set font
 (setq zenit-font (font-spec :family "PragmataPro Liga" :size 18 :weight 'regular)
       ;; zenit-font (font-spec :family "Iosevka Comfy" :size 18 :weight 'regular)
-      zenit-serif-font (font-spec :family "Iosevka Comfy Wide Motion Duo")
-      zenit-variable-pitch-font (font-spec :family "Iosevka Comfy Wide Duo"))
+      zenit-serif-font "Iosevka Comfy Motion"
+      zenit-variable-pitch-font "Iosevka Comfy Wide Duo")
 
 ;;; Set theme
 (setq zenit-theme 'doom-one)

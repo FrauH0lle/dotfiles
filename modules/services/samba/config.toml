@@ -1,26 +1,27 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/services-samba" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Files
-[files]
 # Package configuration
-[files."/etc/portage/*"]
+[[files]]
 source = "gentoo/portage/*"
+target = "/etc/portage/*"
 phase = "setup"
 action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-[files."/etc/*"]
+[[files]]
 source = "gentoo/samba_config/etc/*"
+target = "/etc/*"
 phase = "setup"
 action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Deploy
-[[actions.config.main]]
-exec = """
+[[tasks]]
+shell = """
 # Activate sysusers
 sudo systemd-sysusers
 
@@ -32,17 +33,21 @@ sudo systemctl enable wsdd
 """
 
 # Remove
-[[actions.remove.pre]]
-exec = """
+[[tasks]]
+shell = """
 sudo systemctl disable --now smb
 sudo systemctl disable --now wsdd
 """
+phase = "remove"
+hook = "pre"
 
-[[actions.remove.post]]
-exec = """
+[[tasks]]
+shell = """
 sudo gpasswd -d "$USER" sambashares
 sudo systemd-sysusers
 """
+phase = "remove"
+hook = "post"
 
 [[messages]]
 message = """

@@ -1,18 +1,19 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/desktop-apps-calibre" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Files
-[files]
 # Package configuration
-[files."/etc/portage/*"]
+[[files]]
 source = "gentoo/portage/*"
+target = "/etc/portage/*"
 phase = "setup"
 action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-[files."$HOME/*"]
+[[files]]
 source = "common/home/*"
+target = "$HOME/*"
 phase = "config"
 action = "link"

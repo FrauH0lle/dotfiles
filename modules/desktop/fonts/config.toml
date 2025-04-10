@@ -1,21 +1,32 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/desktop-fonts" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Files
-[files]
-[files."/etc/*"]
+[[files]]
 source = "common/etc/*"
+target = "/etc/*"
 phase = "config"
 action = "copy"
 
 # Actions
-[[actions.config.main]]
-exec = """
+[[tasks]]
+shell = """
 # Symlinks
 sudo ln -sfv /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
 sudo ln -sfv /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
 sudo ln -sfv /etc/fonts/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d
 # sudo ln -sfv /etc/fonts/conf.avail/30-infinality-aliases.conf /etc/fonts/conf.d
 """
+
+[[tasks]]
+shell = """
+# Symlinks
+sudo rm -f /etc/fonts/conf.d/11-lcdfilter-default.conf
+sudo rm -f /etc/fonts/conf.d/10-sub-pixel-rgb.conf
+sudo rm -f /etc/fonts/conf.d/10-hinting-slight.conf
+# sudo rm -f /etc/fonts/conf.d/30-infinality-aliases.conf
+"""
+phase = "remove"
+hook = "pre"

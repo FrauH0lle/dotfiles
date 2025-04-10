@@ -1,20 +1,20 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/hardware-hp-printer" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Files
-[files]
 # Package configuration
-[files."/etc/portage/*"]
+[[files]]
 source = "gentoo/portage/*"
+target = "/etc/portage/*"
 phase = "setup"
 action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Actions
-[[actions.config.main]]
-exec = """
+[[tasks]]
+shell = """
 sudo systemctl enable --now cups.socket
 
 sudo gpasswd -a "$USER" lp
