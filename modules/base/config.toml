@@ -1,44 +1,49 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/base" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Files
-[files]
+[[files]]
 # Package configuration
-[files."/etc/portage/*"]
 source = "gentoo/portage/*"
+target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-# Local repository
-[files."/var/db/repos/local/*"]
-source = "$DOD_ROOT/packages/gentoo/overlay/*"
+# Local repository for Gentoo
+[[files]]
+source = "$DOD_DOTFILES_ROOT/packages/gentoo/overlay/*"
+target = "/var/db/repos/local/*"
 phase = "setup"
-action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-[files."/etc/portage/repos.conf/localrepo.conf"]
-source = "$DOD_ROOT/packages/gentoo/localrepo.conf"
+[[files]]
+source = "$DOD_DOTFILES_ROOT/packages/gentoo/localrepo.conf"
+target = "/etc/portage/repos.conf/localrepo.conf"
 phase = "setup"
-action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-[files."/etc/portage/package.accept_keywords/localrepo"]
-source = "$DOD_ROOT/packages/gentoo/localrepo.keywords"
+[[files]]
+source = "$DOD_DOTFILES_ROOT/packages/gentoo/localrepo.keywords"
+target = "/etc/portage/package.accept_keywords/localrepo"
 phase = "setup"
-action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-# Actions
-# Necessary base setup
-[[actions.setup.pre]]
-exec = "$DOD_ROOT/scripts/gentoo_base_setup.sh"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
-exec_file = true
+# Tasks
+# Necessary base setup, needs to run early
+[[tasks]]
+exec = "$DOD_DOTFILES_ROOT/scripts/gentoo_base_setup.sh"
+phase = "setup"
+hook = "pre"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-[[actions.setup.pre]]
-exec = "$DOD_ROOT/scripts/prepare_system.sh"
-eval_when = "(eq DOD_DISTRO 'ubuntu')"
-exec_file = true
+[[tasks]]
+exec = "$DOD_DOTFILES_ROOT/scripts/prepare_system.sh"
+phase = "setup"
+hook = "pre"
+if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"

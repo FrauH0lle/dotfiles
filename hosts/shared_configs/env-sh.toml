@@ -1,0 +1,29 @@
+# Environment variables to set up
+
+[[generators]]
+target = "$HOME/.env.sh"
+source = "env.sh"
+shebang = "#!/bin/sh"
+prepend = """
+# Prepend directory to PATH if directory exists
+# Arguments:
+#   $1 - Directory
+#   $2 - if 'after' is set, append to PATH
+# Env:
+#   $PATH
+# Outputs:
+#   None. Prepends or appands to $PATH if $2 is 'after'
+pathmunge() {
+    case ":${PATH}:" in
+        *:"$1":*)
+            ;;
+        *)
+            if [ "$2" = "after" ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+    esac
+}
+"""
+append = "unset -f pathmunge"

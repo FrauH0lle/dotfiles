@@ -23,3 +23,6 @@ x11-libs/libdrm video_cards_radeon
 #
 ## Language support
 */* L10N: de de-DE en en-US en-GB
+
+# Strawberry
+media-plugins/gst-plugins-meta taglib

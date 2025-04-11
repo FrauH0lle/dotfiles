@@ -1,38 +1,40 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/dev-containers" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[packages]]
 install = [ "dotdeploy-dev-containers" ]
-eval_when = "(eq DOD_DISTRO 'ubuntu')"
+if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
 # Files
-[files]
+
 # Package configuration
-[files."/etc/portage/*"]
+[[files]]
 source = "gentoo/portage/*"
+target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Actions
-[[actions.setup.main]]
-exec = "$DOD_ROOT/scripts/ensure_ppa.sh michel-slm/distrobox"
-# args = [ "michel-slm/distrobox" ]
-# exec_file = true
-eval_when = "(eq DOD_DISTRO 'ubuntu')"
+[[tasks]]
+shell = "$DOD_DOTFILES_ROOT/scripts/ensure_ppa.sh michel-slm/distrobox"
+if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
+phase = "setup"
 
 # Deploy
-[[actions.config.main]]
-exec = """
+[[tasks]]
+shell = """
 # Set subuid and subgid
 sudo touch /etc/subuid /etc/subgid
 sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$USER"
 """
 
 # Remove
-[[actions.remove.post]]
-exec = """
+[[tasks]]
+shell = """
 sudo usermod --del-subuids 100000-165535 --del-subgids 100000-165535 "$USER"
 """
+phase = "remove"
+hook = "pre"

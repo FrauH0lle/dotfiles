@@ -1,13 +1,13 @@
 # Packages
 [[packages]]
 install = [ "dotdeploy/dev-rust" ]
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Files
-[files]
 # Package configuration
-[files."/etc/portage/*"]
+[[files]]
 source = "gentoo/portage/*"
+target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
-eval_when = "(eq DOD_DISTRO 'gentoo')"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
