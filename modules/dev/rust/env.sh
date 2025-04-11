@@ -1,1 +1,1 @@
-#pathmunge "$HOME"/.cargo/bin
+. "$HOME/.cargo/env"
