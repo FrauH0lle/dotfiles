@@ -9,11 +9,11 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]
 source = "common/home/*"
 target = "$HOME/*"
 phase = "config"
-action = "link"
+type = "link"

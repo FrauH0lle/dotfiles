@@ -13,7 +13,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]
@@ -22,13 +22,13 @@ target = "$HOME/*"
 
 # Actions
 [[tasks]]
-exec = "$DOD_ROOT/scripts/ensure_ppa.sh"
+exec = "$DOD_DOTFILES_ROOT/scripts/ensure_ppa.sh"
 args = [ "ubuntuhandbook1/emacs" ]
 phase = "setup"
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
 [[tasks]]
-exec = "$DOD_ROOT/scripts/ensure_repo.sh"
+exec = "$DOD_DOTFILES_ROOT/scripts/ensure_repo.sh"
 args = [ "git@github.com:FrauH0lle/emacs.d.git", "~/.emacs.d" ]
 
 [[messages]]

@@ -1,5 +1,5 @@
 # Modules
-depends = [
+depends_on = [
   "base",
   "shell/bash",
   "shell/zsh",
@@ -33,14 +33,14 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # System tweaks
 [[files]]
 source = "gentoo/tweaks/*"
 target = "/etc/*"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Host specific dotfiles

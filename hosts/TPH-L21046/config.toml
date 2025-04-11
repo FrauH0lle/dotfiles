@@ -1,5 +1,5 @@
 # Modules
-depends = [
+depends_on = [
   "base",
   "shell/bash",
   "editors/emacs",
@@ -10,7 +10,7 @@ depends = [
 [files."$HOME/*"]
 source = "home/*"
 phase = "config"
-action = "link"
+type = "link"
 
 # Files to generate
 [generate."$HOME/.env.sh"]

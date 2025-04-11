@@ -8,7 +8,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 source = "common/etc/*"
 target = "/etc/*"
 phase = "config"
-action = "copy"
+type = "copy"
 
 # Actions
 [[tasks]]

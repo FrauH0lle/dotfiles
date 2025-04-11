@@ -9,13 +9,13 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]
 source = "49-wheel.rules"
 target = "/etc/etc/polkit-1/rules.d/49-wheel.rules"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Actions

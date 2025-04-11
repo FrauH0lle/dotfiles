@@ -9,14 +9,14 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]
 source = "gentoo/samba_config/etc/*"
 target = "/etc/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Deploy

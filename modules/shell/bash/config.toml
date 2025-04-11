@@ -1,4 +1,4 @@
-depends = [ "shell/common" ]
+depends_on = [ "shell/common" ]
 
 # Packages
 [[packages]]
@@ -10,7 +10,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]

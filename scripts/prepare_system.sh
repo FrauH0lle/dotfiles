@@ -36,7 +36,7 @@ case "$DOD_DISTRIBUTION_NAME" in
         dod_build_dir=/tmp/dod_build
         mkdir -p "$dod_build_dir"
 
-        mapfile -t deb_srcs < <(find "$DOD_ROOT"/packages/ubuntu/sources -type f -name "*.ctl")
+        mapfile -t deb_srcs < <(find "$DOD_DOTFILES_ROOT"/packages/ubuntu/sources -type f -name "*.ctl")
         for deb_src in "${deb_srcs[@]}"; do
             cp "$deb_src" "$dod_build_dir"/"$(basename "$deb_src")"
         done
@@ -66,7 +66,7 @@ case "$DOD_DISTRIBUTION_NAME" in
         unset -v deb_files
         unset -v deb
 
-        sudo cp "$DOD_ROOT"/packages/ubuntu/dotdeploy-update-repo /usr/local/bin/dotdeploy-update-repo
+        sudo cp "$DOD_DOTFILES_ROOT"/packages/ubuntu/dotdeploy-update-repo /usr/local/bin/dotdeploy-update-repo
         sudo chmod +x /usr/local/bin/dotdeploy-update-repo
 
         # Execute repo script
@@ -75,12 +75,12 @@ case "$DOD_DISTRIBUTION_NAME" in
         # Add repository to sources
         if [[ -f /etc/apt/sources.list.d/dotdeploy.list ]]; then
           dest_checksum=$(sha256sum /etc/apt/sources.list.d/dotdeploy.list | cut -d ' ' -f 1)
-          source_checksum=$(sha256sum "$DOD_ROOT"/packages/ubuntu/dotdeploy.list | cut -d ' ' -f 1)
+          source_checksum=$(sha256sum "$DOD_DOTFILES_ROOT"/packages/ubuntu/dotdeploy.list | cut -d ' ' -f 1)
           if [[ $dest_checksum != "$source_checksum" ]]; then
-            sudo cp -v "$DOD_ROOT"/packages/ubuntu/dotdeploy.list /etc/apt/sources.list.d/dotdeploy.list
+            sudo cp -v "$DOD_DOTFILES_ROOT"/packages/ubuntu/dotdeploy.list /etc/apt/sources.list.d/dotdeploy.list
           fi
         else
-            sudo cp -v "$DOD_ROOT"/packages/ubuntu/dotdeploy.list /etc/apt/sources.list.d/dotdeploy.list
+            sudo cp -v "$DOD_DOTFILES_ROOT"/packages/ubuntu/dotdeploy.list /etc/apt/sources.list.d/dotdeploy.list
         fi
 
         popd > /dev/null || exit 1

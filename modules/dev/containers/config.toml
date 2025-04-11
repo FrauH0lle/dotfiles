@@ -14,12 +14,12 @@ if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Actions
 [[tasks]]
-shell = "$DOD_ROOT/scripts/ensure_ppa.sh michel-slm/distrobox"
+shell = "$DOD_DOTFILES_ROOT/scripts/ensure_ppa.sh michel-slm/distrobox"
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 phase = "setup"
 

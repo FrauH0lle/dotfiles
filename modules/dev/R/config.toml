@@ -14,7 +14,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
 phase = "setup"
-action = "copy"
+type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]
