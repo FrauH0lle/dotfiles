@@ -18,7 +18,11 @@ type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]
-source = "common/home/*"
-target = "$HOME/*"
+source = "Makevars"
+target = "$HOME/.R/Makevars"
 type = "copy"
 template = true
+
+[[files]]
+source = "Rprofile"
+target = "$HOME/.Rprofile"
