@@ -59,8 +59,9 @@ shopt -s checkwinsize
 
 #
 ## Custom settings
-[[ -f $HOME/.commonrc ]] && source "$HOME/.commonrc"
 
+# Envvars
+export EDITOR=$(which nano)
 IS_BASH="true"
 IS_ZSH="false"
 
@@ -73,4 +74,6 @@ export PATH
 
 # Aliases
 [[ -f $HOME/.aliases.sh ]] && source "$HOME/.aliases.sh"
-. "$HOME/.cargo/env"
+
+unset IS_BASH
+unset IS_ZSH
