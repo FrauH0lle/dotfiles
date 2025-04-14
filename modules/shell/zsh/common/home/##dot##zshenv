@@ -3,9 +3,9 @@
 # Anything in this file can be overwritten by the upcoming zsh config files. Be
 # aware!
 #
-# Zsh startup, Solus specific:
+# Zsh startup:
 
-# /usr/share/defaults/etc/zsh/zshenv
+# /etc/zsh/zshenv
 # Used for setting environment variables for all users; it should not contain
 # commands that produce output or assume the shell is attached to a TTY. When
 # this file exists it will always be read, this cannot be overridden.
@@ -15,7 +15,7 @@
 # that produce output or assume the shell is attached to a TTY. When this file
 # exists it will always be read.
 
-# /usr/share/defaults/etc/zsh/zprofile
+# /etc/zsh/zprofile
 # Used for executing commands at start for all users, will be read when starting
 # as a login shell. By default it contains a line which sources /etc/profile.
 
@@ -29,7 +29,7 @@
 # login shell. Typically used to autostart graphical sessions and to set
 # session-wide environment variables.
 
-# /usr/share/defaults/etc/zsh/zshrc
+# /etc/zsh/zshrc
 # Used for setting interactive shell configuration and executing commands for
 # all users, will be read when starting as an interactive shell.
 
@@ -37,7 +37,7 @@
 # Used for setting user's interactive shell configuration and executing
 # commands, will be read when starting as an interactive shell.
 
-# /usr/share/defaults/etc/zsh/zlogin
+# /etc/zsh/zlogin
 # Used for executing commands for all users at ending of initial progress, will
 # be read when starting as a login shell.
 
@@ -51,16 +51,9 @@
 # $ZDOTDIR/.zlogout
 # Used for executing commands when a login shell exits.
 
-# /usr/share/defaults/etc/zsh/zlogout
+# /etc/zsh/zlogout
 # Used for executing commands for all users when a login shell exits.
 
-# Environment
-[[ -f $HOME/.commonrc ]] && source "$HOME/.commonrc"
-[[ -f $HOME/.env.sh ]] && source "$HOME/.env.sh"
-
 # Setup $ZDOTDIR
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
-# Envvars
-export EDITOR=nano
-. "$HOME/.cargo/env"
