@@ -11,3 +11,7 @@ target = "/etc/portage/*"
 phase = "setup"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+
+[[tasks]]
+shell = "rm -rf ~/.cargo"
+phase = "remove"
