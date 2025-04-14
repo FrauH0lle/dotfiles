@@ -1,0 +1,24 @@
+# Local repository for Gentoo
+[[files]]
+source = "$DOD_DOTFILES_ROOT/packages/gentoo/overlay/*"
+target = "/var/db/repos/local/*"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "$DOD_DOTFILES_ROOT/packages/gentoo/layout.conf"
+target = "/var/db/repos/local/metadata/layout.conf"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "$DOD_DOTFILES_ROOT/packages/gentoo/localrepo.conf"
+target = "/etc/portage/repos.conf/localrepo.conf"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "$DOD_DOTFILES_ROOT/packages/gentoo/localrepo.keywords"
+target = "/etc/portage/package.accept_keywords/localrepo"
+phase = "setup"
+type = "copy"
