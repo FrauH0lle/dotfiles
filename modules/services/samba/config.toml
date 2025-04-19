@@ -19,34 +19,35 @@ phase = "setup"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-# Deploy
 [[tasks]]
+description = "SMB setup"
+[[tasks.config]]
 shell = """
 # Activate sysusers
 sudo systemd-sysusers
 
 # Add user to Samba usershare group
-sudo gpasswd -a "$USER" sambashares
+if ! id -nG "$USER" | grep -qw sambashares; then
+  sudo gpasswd -a "$USER" sambashares
+fi
 
 sudo systemctl enable smb
 sudo systemctl enable wsdd
 """
-
-# Remove
-[[tasks]]
+[[tasks.remove]]
 shell = """
 sudo systemctl disable --now smb
 sudo systemctl disable --now wsdd
 """
-phase = "remove"
 hook = "pre"
-
-[[tasks]]
+[[tasks.remove]]
 shell = """
-sudo gpasswd -d "$USER" sambashares
+if id -nG "$USER" | grep -qw sambashares; then
+  sudo gpasswd -d "$USER" sambashares
+fi
+
 sudo systemd-sysusers
 """
-phase = "remove"
 hook = "post"
 
 [[messages]]

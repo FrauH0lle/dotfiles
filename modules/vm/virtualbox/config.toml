@@ -5,12 +5,16 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Deploy
 [[tasks]]
+description = "Add $USER to vboxusers"
+[[tasks.config]]
 shell = """
-sudo gpasswd -a "$USER" vboxusers
+if ! id -nG "$USER" | grep -qw vboxusers; then
+  sudo gpasswd -a "$USER" vboxusers
+fi
 """
-
-[[tasks]]
+[[tasks.remove]]
 shell = """
-sudo gpasswd -d "$USER" vboxusers
+if id -nG "$USER" | grep -qw vboxusers; then
+  sudo gpasswd -d "$USER" vboxusers
+fi
 """
-phase = "remove"

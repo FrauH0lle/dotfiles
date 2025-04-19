@@ -19,22 +19,24 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Actions
 [[tasks]]
-shell = "$DOD_DOTFILES_ROOT/scripts/ensure_ppa.sh michel-slm/distrobox"
+description = "Enable latest Distrobox PPA"
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
-phase = "setup"
+[[tasks.setup]]
+shell = "$DOD_DOTFILES_ROOT/scripts/ensure_ppa.sh michel-slm/distrobox"
+[[tasks.remove]]
+shell = "sudo add-apt-repository --remove ppa:michel-slm/distrobox"
 
 # Deploy
 [[tasks]]
+description = "UID/GIDs for podman"
+[[tasks.config]]
 shell = """
 # Set subuid and subgid
 sudo touch /etc/subuid /etc/subgid
 sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$USER"
 """
-
-# Remove
-[[tasks]]
+[[tasks.remove]]
 shell = """
 sudo usermod --del-subuids 100000-165535 --del-subgids 100000-165535 "$USER"
 """
-phase = "remove"
 hook = "pre"

@@ -21,29 +21,29 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 # Actions
 # Deployment
 [[tasks]]
+description = "Pipewire"
+[[tasks.config]]
 shell = """
 # Activate pipewire
 systemctl --user enable --now pipewire.socket pipewire-pulse.socket wireplumber.service
 """
+[[tasks.remove]]
+shell = """
+systemctl --user disable --now pipewire.socket pipewire-pulse.socket wireplumber.service
+"""
+hook = "pre"
 
+# Removal
 [[tasks]]
+description = "Flathub repository"
+[[tasks.config]]
 shell = """
 # Add Flathub repo
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 """
-
-# Removal
-[[tasks]]
+[[tasks.remove]]
 shell = """
-systemctl --user disable --now pipewire.socket pipewire-pulse.socket wireplumber.service
-"""
-phase = "remove"
-hook = "pre"
-
-[[tasks]]
-shell = """
-# Add Flathub repo
+# Remove Flathub repo
 sudo flatpak remote-delete flathub
 """
-phase = "remove"
 hook = "pre"

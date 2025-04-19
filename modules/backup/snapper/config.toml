@@ -11,20 +11,18 @@ phase = "setup"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-# Deploy
 [[tasks]]
+description = "Enable snapper services and GRUB integration"
+[[tasks.config]]
 shell = """
 sudo systemctl enable --now snapper-cleanup.timer snapper-timeline.timer
 sudo systemctl enable --now grub-btrfsd.service
 """
-
-# Remove
-[[tasks]]
+[[tasks.remove]]
 shell = """
 sudo systemctl disable --now snapper-cleanup.timer snapper-timeline.timer
 sudo systemctl disable --now grub-btrfsd.service
 """
-phase = "remove"
 hook = "pre"
 
 [[messages]]

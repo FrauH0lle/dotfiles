@@ -18,25 +18,22 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 source = "common/home/*"
 target = "$HOME/*"
 
-# Actions
-
 [[tasks]]
-shell = """
-rm -f "$HOME"/.zshenv
-rm -rf ${XDG_CONFIG_HOME:-~/.config}/zsh/
-rm -rf ${XDG_DATA_HOME:-~/.local/share}/zgenom
-"""
-phase = "remove"
-
-## Update zgenom and plugins
-[[tasks]]
+description = "ZSH setup and maintenance"
+[[tasks.config]]
+# Ensure .zshenv symlink exists
+shell = """ln -svf "$HOME"/.zshenv "$HOME"/.config/zsh/.zshenv"""
+[[tasks.update]]
+# Update zgenom and plugins
 shell = """
 zgenom selfupdate
 zgenom update
 zgenom reset
 """
 phase = "update"
-
-## Ensure .zshenv symlink exists
-[[tasks]]
-shell = """ln -svf "$HOME"/.zshenv "$HOME"/.config/zsh/.zshenv"""
+[[tasks.remove]]
+shell = """
+rm -f "$HOME"/.zshenv
+rm -rf ${XDG_CONFIG_HOME:-~/.config}/zsh/
+rm -rf ${XDG_DATA_HOME:-~/.local/share}/zgenom
+"""

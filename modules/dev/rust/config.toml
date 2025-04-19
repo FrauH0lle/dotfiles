@@ -13,5 +13,6 @@ type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[tasks]]
+description = "Remove Rust Cargo"
+[[tasks.remove]]
 shell = "rm -rf ~/.cargo"
-phase = "remove"

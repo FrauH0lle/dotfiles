@@ -22,12 +22,17 @@ target = "$HOME/*"
 
 # Actions
 [[tasks]]
+description = "Enable latest Emacs PPA"
+if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
+[[tasks.setup]]
 exec = "$DOD_DOTFILES_ROOT/scripts/ensure_ppa.sh"
 args = [ "ubuntuhandbook1/emacs" ]
-phase = "setup"
-if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
+[[tasks.remove]]
+shell = "sudo add-apt-repository --remove ppa:ubuntuhandbook1/emacs"
 
 [[tasks]]
+description = "Install Emacs config"
+[[tasks.config]]
 exec = "$DOD_DOTFILES_ROOT/scripts/ensure_repo.sh"
 args = [ "git@github.com:FrauH0lle/emacs.d.git", "~/.emacs.d" ]
 

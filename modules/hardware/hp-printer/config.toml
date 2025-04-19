@@ -14,10 +14,31 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Actions
 [[tasks]]
+description = "Enable CUPS service"
+[[tasks.config]]
 shell = """
 sudo systemctl enable --now cups.socket
+"""
+[[tasks.remove]]
+shell = """
+sudo systemctl disable --now cups.socket
+"""
 
-sudo gpasswd -a "$USER" lp
-sudo gpasswd -a "$USER" lpadmin
-sudo gpasswd -a "$USER" scanner
+[[tasks]]
+description = "Add $USER to printer groups"
+[[tasks.config]]
+shell = """
+for GROUP in lp lpadmin scanner; do
+  if ! id -nG "$USER" | grep -qw "$GROUP"; then
+    sudo gpasswd -a "$USER" "$GROUP"
+  fi
+done
+"""
+[[tasks.remove]]
+shell = """
+for GROUP in lp lpadmin scanner; do
+  if id -nG "$USER" | grep -qw "$GROUP"; then
+    sudo gpasswd -d "$USER" "$GROUP"
+  fi
+done
 """

@@ -17,13 +17,15 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 # Tasks
 # Necessary base setup, needs to run early
 [[tasks]]
-exec = "$DOD_DOTFILES_ROOT/scripts/gentoo_base_setup.sh"
-phase = "setup"
-hook = "pre"
+description = "Gentoo base setup"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+[[tasks.setup]]
+exec = "$DOD_DOTFILES_ROOT/scripts/gentoo_base_setup.sh"
+hook = "pre"
 
 [[tasks]]
-exec = "$DOD_DOTFILES_ROOT/scripts/prepare_system.sh"
-phase = "setup"
-hook = "pre"
+description = "Ubuntu base setup"
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
+[[tasks.setup]]
+exec = "$DOD_DOTFILES_ROOT/scripts/prepare_system.sh"
+hook = "pre"

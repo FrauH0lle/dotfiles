@@ -66,7 +66,8 @@ shebang = "#!/bin/sh"
 
 # Actions
 [[tasks]]
-# Enable fstrim
+description = "Enable fstrim"
+[[tasks.config]]
 shell = "sudo systemctl enable fstrim.timer"
 
 # Context variables for template expansion

@@ -7,24 +7,21 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 install = [ "dotdeploy-shell-common" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
-# Install and maintain tealdear
 [[tasks]]
+description = "Install and maintain tealdear"
+[[tasks.config]]
 shell = """
 if [ ! -f $XDG_BIN_HOME/tldr ]; then
   wget -O $XDG_BIN_HOME/tldr https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl
   chmod +x $XDG_BIN_HOME/tldr
 fi
 """
-
-[[tasks]]
+[[tasks.update]]
 shell = """
 wget -O $XDG_BIN_HOME/tldr https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl
 chmod +x $XDG_BIN_HOME/tldr
 """
-phase = "update"
-
-[[tasks]]
+[[tasks.remove]]
 shell = """
 rm  -f $XDG_BIN_HOME/tldr
 """
-phase = "remove"
