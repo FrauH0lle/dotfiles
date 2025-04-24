@@ -14,5 +14,9 @@ type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]
-source = "common/home/*"
-target = "$HOME/*"
+source = "bash_profile"
+target = "$HOME/.bash_profile"
+
+[[files]]
+source = "bashrc"
+target = "$HOME/.bashrc"

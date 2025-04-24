@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-# Environment
-[[ -f $HOME/.env.sh ]] && source "$HOME/.env.sh"
-export PATH
-
 # Stop TRAMP (in Emacs) from hanging or term/shell from echoing back commands
 if [[ $TERM == dumb || -n $INSIDE_EMACS ]]; then
   unsetopt zle prompt_cr prompt_subst
