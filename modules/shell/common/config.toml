@@ -8,20 +8,73 @@ install = [ "dotdeploy-shell-common" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
 [[tasks]]
-description = "Install and maintain tealdear"
+description = "tealdear"
 [[tasks.config]]
+description = "Ensure tealdear is installed"
 shell = """
-if [ ! -f $XDG_BIN_HOME/tldr ]; then
-  wget -O $XDG_BIN_HOME/tldr https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl
-  chmod +x $XDG_BIN_HOME/tldr
+if [ ! -f "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr" ]; then
+  curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl -o "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
+  chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
+fi
+"""
+[[tasks.config]]
+description = "Ensure tealdear bash completions are installed"
+shell = """
+mkdir -p "$HOME/.local/share/bash-completion/completions"
+if [ ! -f "$HOME/.local/share/bash-completion/completions"/tldr.bash ]; then
+  curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_bash -o "$HOME/.local/share/bash-completion/completions"/tldr.bash
+fi
+"""
+if = "(contains 'shell/bash' DOD_MODULES)"
+[[tasks.config]]
+description = "Ensure tealdear zsh completions are installed"
+shell = """
+mkdir -p "$HOME/.config/zsh/completions"
+if [ ! -f "$HOME/.config/zsh/completions"/_tldr ]; then
+  curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_zsh -o "$HOME/.config/zsh/completions"/_tldr
+fi
+"""
+if = "(contains 'shell/zsh' DOD_MODULES)"
+[[tasks.update]]
+description = "Ensure tealdear is up-to-date"
+shell = """
+curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl -o "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
+chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
+"""
+[[tasks.update]]
+description = "Ensure tealdear zsh completions are up-to-date"
+shell = """
+mkdir -p "$HOME/.config/zsh/completions"
+curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_zsh -o "$HOME/.config/zsh/completions"/_tldr
+"""
+if = "(contains 'shell/zsh' DOD_MODULES)"
+[[tasks.update]]
+description = "Ensure tealdear bash completions are up-to-date"
+shell = """
+mkdir -p "$HOME/.local/share/bash-completion/completions"
+curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_bash -o "$HOME/.local/share/bash-completion/completions"/tldr.bash
+"""
+if = "(contains 'shell/bash' DOD_MODULES)"
+[[tasks.remove]]
+description = "Remove tealdear and completions"
+shell = """
+rm -f "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
+rm -f "$HOME/.local/share/bash-completion/completions"/tldr.bash
+rm -f "$HOME/.config/zsh/completions"/_tldr
+"""
+
+[[tasks]]
+description = "direnv"
+[[tasks.config]]
+description = "Ensure direnv is installed"
+shell = """
+if [ ! -f "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr" ]; then
+  curl -LsSf https://github.com/direnv/direnv/releases/latest/download/direnv.linux-amd64 -o "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
+  chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
 fi
 """
 [[tasks.update]]
+description = "Ensure direnv is up-to-date"
 shell = """
-wget -O $XDG_BIN_HOME/tldr https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl
-chmod +x $XDG_BIN_HOME/tldr
-"""
-[[tasks.remove]]
-shell = """
-rm  -f $XDG_BIN_HOME/tldr
-"""
+curl -LsSf https://github.com/direnv/direnv/releases/latest/download/direnv.linux-amd64 -o "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
+chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
