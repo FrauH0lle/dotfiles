@@ -77,4 +77,5 @@ fi
 description = "Ensure direnv is up-to-date"
 shell = """
 curl -LsSf https://github.com/direnv/direnv/releases/latest/download/direnv.linux-amd64 -o "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
-chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
+chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv
+"""
