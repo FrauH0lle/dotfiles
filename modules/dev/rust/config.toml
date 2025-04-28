@@ -13,6 +13,14 @@ type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[tasks]]
-description = "Remove Rust Cargo"
+description = "Rust setup"
+[[tasks.config]]
+description = "Install Cargo"
+shell = '''
+if [ ! -f "$HOME/.cargo/bin/cargo" ]; then
+  rustup-init -y --no-modify-path
+fi
+'''
 [[tasks.remove]]
+description = "Remove Cargo"
 shell = "rm -rf ~/.cargo"
