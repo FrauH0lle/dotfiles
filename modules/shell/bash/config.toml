@@ -20,3 +20,19 @@ target = "$HOME/.bash_profile"
 [[files]]
 source = "bashrc"
 target = "$HOME/.bashrc"
+
+[[tasks]]
+description = "dotdeploy"
+if = "(is_executable 'dotdeploy')"
+[[tasks.config]]
+description = "Install Bash completions"
+shell = '''
+mkdir -p "$HOME/.local/share/bash-completion/completions"
+dotdeploy completions -s bash > "$HOME/.local/share/bash-completion/completions"/dotdeploy.bash
+'''
+[[tasks.update]]
+description = "Update Bash completions"
+shell = '''
+mkdir -p "$HOME/.local/share/bash-completion/completions"
+dotdeploy completions -s bash > "$HOME/.local/share/bash-completion/completions"/dotdeploy.bash
+'''
