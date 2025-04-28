@@ -28,14 +28,21 @@ shell = "sudo add-apt-repository --remove ppa:michel-slm/distrobox"
 
 # Deploy
 [[tasks]]
-description = "UID/GIDs for podman"
+description = "podman"
 [[tasks.config]]
+description = "Set subordinate UID/GIDs for $USER"
 shell = """
 # Set subuid and subgid
-sudo touch /etc/subuid /etc/subgid
+if [ ! -f /etc/subuid ]; then
+  sudo touch /etc/subuid
+fi
+if [ ! -f /etc/subgid ]; then
+  sudo touch /etc/subgid
+fi
 sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$USER"
 """
 [[tasks.remove]]
+description = "Remove subordinate UID/GIDs for $USER"
 shell = """
 sudo usermod --del-subuids 100000-165535 --del-subgids 100000-165535 "$USER"
 """
