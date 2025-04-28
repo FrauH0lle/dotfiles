@@ -19,21 +19,29 @@ source = "common/home/*"
 target = "$HOME/*"
 
 [[tasks]]
+description = "dotdeploy"
+if = "(is_executable 'dotdeploy')"
+[[tasks.config]]
+description = "Install ZSH completions"
+shell = '''
+mkdir -p "$HOME/.config/zsh/completions"
+dotdeploy completions -s zsh > "$HOME/.config/zsh/completions"/_dotdeploy
+'''
+[[tasks.update]]
+description = "Update ZSH completions"
+shell = '''
+mkdir -p "$HOME/.config/zsh/completions"
+dotdeploy completions -s zsh > "$HOME/.config/zsh/completions"/_dotdeploy
+'''
+
+[[tasks]]
 description = "ZSH setup and maintenance"
 [[tasks.config]]
 # Ensure .zshenv symlink exists
 shell = """ln -svf "$HOME"/.zshenv "$HOME"/.config/zsh/.zshenv"""
-[[tasks.update]]
-# Update zgenom and plugins
-shell = """
-zgenom selfupdate
-zgenom update
-zgenom reset
-"""
-phase = "update"
 [[tasks.remove]]
-shell = """
+shell = '''
 rm -f "$HOME"/.zshenv
-rm -rf ${XDG_CONFIG_HOME:-~/.config}/zsh/
-rm -rf ${XDG_DATA_HOME:-~/.local/share}/zgenom
-"""
+rm -rf "${XDG_CONFIG_HOME:-$HOME/.config}"/zsh/
+rm -rf "${XDG_DATA_HOME:-$HOME/.local/share}"/zgenom
+'''

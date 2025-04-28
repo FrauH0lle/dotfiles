@@ -10,6 +10,8 @@ fi
 
 ## Bootstrap interactive session
 if [[ $TERM != dumb ]]; then
+  # Don't call compinit too early. I'll do it a bit later manually.
+  export ZGEN_AUTOLOAD_COMPINIT=0
 
   # Enable Powerlevel10k instant prompt. Should stay close to the top of
   # ~/.config/zsh/.zshrc. Initialization code that may require console input
@@ -55,20 +57,21 @@ if [[ $TERM != dumb ]]; then
   ## Plugin configuration
 
   ## Bootstrap zgenom
-  export ZGEN_DIR="${ZGEN_DIR:-${XDG_DATA_HOME:-~/.local/share}/zgenom}"
+  export ZGEN_DIR="${ZGEN_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/zgenom}"
   if [[ ! -d "$ZGEN_DIR" ]]; then
     # Use zgenom because zgen is no longer maintained
     echo "Installing jandamm/zgenom"
     git clone https://github.com/jandamm/zgenom "$ZGEN_DIR"
   fi
 
-  source $ZGEN_DIR/zgenom.zsh
+  source "$ZGEN_DIR/zgenom.zsh"
   zgenom autoupdate   # checks for updates every ~7 days
   if ! zgenom saved; then
     echo "Initializing zgenom"
     rm -frv $ZDOTDIR/*.zwc(N) \
             $ZDOTDIR/.*.zwc(N) \
             $XDG_CACHE_HOME/zsh \
+            $ZDOTDIR/completions/_*.zwc(N) \
             $ZGEN_INIT.zwc
 
     # Oh My Zsh
@@ -86,11 +89,9 @@ if [[ $TERM != dumb ]]; then
     zgenom save
 
     # Must be explicit because zgenom compile might ignore symlinks
-    zgenom compile \
-      $ZDOTDIR/*(-.N) \
-      $ZDOTDIR/.*(-.N) \
-      $ZDOTDIR/completions/_*(-.N) \
-      $DOTFILES_HOME/lib/zsh/*~*.zwc(.N)
+    local files=($ZDOTDIR/*(-.N) $ZDOTDIR/.*(-.N) $ZDOTDIR/completions/_*(-.N))
+    files=(${files:#*.zwc})
+    zgenom compile $files
   fi
 
   ## Dotfiles
@@ -103,8 +104,17 @@ if [[ $TERM != dumb ]]; then
   # Aliases
   [[ -f $HOME/.aliases.sh ]] && source "$HOME/.aliases.sh"
 
+  # Completions
+  [[ -f $HOME/.completions.sh ]] && source "$HOME/.completions.sh"
+  fpath+=( "$ZDOTDIR/completions" )
+  ZCOMPCACHE="$XDG_CACHE_HOME/zsh/zcompdump.$ZSH_VERSION"
+  if autoload -Uz compinit; then
+    compinit -u -C -d "$ZCOMPCACHE"
+    [[ ! -f "$ZCOMPCACHE.zwc" && -f $ZCOMPCACHE ]] && zcompile "$ZCOMPCACHE"
+  fi
+
   # Local settings
-  [[ ! -f ~/.config/zsh/.zshrc.local ]] || source ~/.config/zsh/.zshrc.local
+  [[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zshrc.local ]] || source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zshrc.local
 
   unset IS_BASH
   unset IS_ZSH
@@ -117,5 +127,5 @@ if [[ $TERM != dumb ]]; then
   fi
 
   # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-  [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+  [[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.p10k.zsh ]] || source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.p10k.zsh
 fi
