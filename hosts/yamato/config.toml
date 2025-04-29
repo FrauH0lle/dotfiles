@@ -20,9 +20,12 @@ depends_on = [
   "backup/snapper"
 ]
 
-includes = [ "$DOD_HOSTS_ROOT/shared_configs/env-sh.toml" ]
 ## Config to include
 
+includes = [
+  "$DOD_HOSTS_ROOT/shared_configs/env-sh.toml",
+  "$DOD_HOSTS_ROOT/shared_configs/fstrim.toml"
+]
 
 ## Packages
 
@@ -69,11 +72,6 @@ source = "completions.sh"
 target = "$HOME/.completions.sh"
 shebang = "#!/bin/sh"
 
-# Actions
-[[tasks]]
-description = "Enable fstrim service"
-[[tasks.config]]
-shell = "sudo systemctl enable fstrim.timer"
 ## Context variables for template expansion
 
 [context_vars]

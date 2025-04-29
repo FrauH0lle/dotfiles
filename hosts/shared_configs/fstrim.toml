@@ -1,0 +1,9 @@
+[[tasks]]
+description = "fstrim"
+[[tasks.config]]
+description = "Ensure fstrim.timer is enabled"
+shell = """
+if ! systemctl is-enabled --quiet fstrim.timer; then
+  sudo systemctl enable fstrim.timer
+fi
+"""
