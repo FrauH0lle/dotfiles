@@ -1,0 +1,2 @@
+install_pkg_cmd = [ "sudo", "emerge", "--verbose", "--changed-use", "--deep" ]
+remove_pkg_cmd = [ "sudo", "emerge", "--deselect" ]
