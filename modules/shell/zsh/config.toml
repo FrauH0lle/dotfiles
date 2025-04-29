@@ -22,23 +22,25 @@ target = "$HOME/*"
 description = "dotdeploy"
 if = "(is_executable 'dotdeploy')"
 [[tasks.config]]
-description = "Install ZSH completions"
+description = "Install Zsh completions"
 shell = '''
 mkdir -p "$HOME/.config/zsh/completions"
 dotdeploy completions -s zsh > "$HOME/.config/zsh/completions"/_dotdeploy
 '''
 [[tasks.update]]
-description = "Update ZSH completions"
+description = "Update Zsh completions"
 shell = '''
 mkdir -p "$HOME/.config/zsh/completions"
 dotdeploy completions -s zsh > "$HOME/.config/zsh/completions"/_dotdeploy
 '''
 
 [[tasks]]
-description = "ZSH setup and maintenance"
+description = "Zsh setup and maintenance"
 [[tasks.config]]
-# Ensure .zshenv symlink exists
-shell = """ln -svf "$HOME"/.zshenv "$HOME"/.config/zsh/.zshenv"""
+description = "Ensure .zshenv symlink exists"
+shell = '''
+ln -svf "$HOME"/.zshenv "$HOME"/.config/zsh/.zshenv
+'''
 [[tasks.remove]]
 shell = '''
 rm -f "$HOME"/.zshenv

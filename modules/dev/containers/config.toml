@@ -31,7 +31,7 @@ shell = "sudo add-apt-repository --remove ppa:michel-slm/distrobox"
 description = "podman"
 [[tasks.config]]
 description = "Set subordinate UID/GIDs for $USER"
-shell = """
+shell = '''
 # Set subuid and subgid
 if [ ! -f /etc/subuid ]; then
   sudo touch /etc/subuid
@@ -39,8 +39,12 @@ fi
 if [ ! -f /etc/subgid ]; then
   sudo touch /etc/subgid
 fi
-sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$USER"
-"""
+if grep -q "$USER:100000:65536" /etc/subgid; then
+  echo "$USER already set up"
+else
+  sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$USER"
+fi
+'''
 [[tasks.remove]]
 description = "Remove subordinate UID/GIDs for $USER"
 shell = """

@@ -31,8 +31,9 @@ args = [ "ubuntuhandbook1/emacs" ]
 shell = "sudo add-apt-repository --remove ppa:ubuntuhandbook1/emacs"
 
 [[tasks]]
-description = "Install Emacs config"
+description = "Emacs"
 [[tasks.config]]
+description = "Install config"
 exec = "$DOD_DOTFILES_ROOT/scripts/ensure_repo.sh"
 args = [ "git@github.com:FrauH0lle/emacs.d.git", "~/.emacs.d" ]
 

@@ -12,16 +12,22 @@ type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[tasks]]
-description = "Enable snapper services and GRUB integration"
+description = "snapper"
 [[tasks.config]]
-shell = """
-sudo systemctl enable --now snapper-cleanup.timer snapper-timeline.timer
-sudo systemctl enable --now grub-btrfsd.service
-"""
+description = "Enable services and GRUB integration"
+shell = '''
+for SERVICE in snapper-cleanup.timer snapper-timeline.timer grub-btrfsd.service; do
+  if ! systemctl is-enabled --quiet "$SERVICE"; then
+    sudo systemctl enable --now "$SERVICE"
+  fi
+done
+'''
 [[tasks.remove]]
+description = "Disable services and GRUB integration"
 shell = """
-sudo systemctl disable --now snapper-cleanup.timer snapper-timeline.timer
-sudo systemctl disable --now grub-btrfsd.service
+for SERVICE in snapper-cleanup.timer snapper-timeline.timer grub-btrfsd.service; do
+  sudo systemctl disable --now "$SERVICE"
+done
 """
 hook = "pre"
 

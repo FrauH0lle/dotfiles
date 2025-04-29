@@ -35,15 +35,17 @@ hook = "pre"
 
 # Removal
 [[tasks]]
-description = "Flathub repository"
+description = "Flathub"
 [[tasks.config]]
-shell = """
-# Add Flathub repo
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-"""
+description = "Add repository"
+shell = '''
+if ! flatpak remotes | grep -q "flathub"; then
+  sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+fi
+'''
 [[tasks.remove]]
+description = "Remove repository"
 shell = """
-# Remove Flathub repo
 sudo flatpak remote-delete flathub
 """
 hook = "pre"

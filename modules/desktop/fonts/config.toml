@@ -12,21 +12,25 @@ type = "copy"
 
 # Actions
 [[tasks]]
-description = "Symlink fontconfig"
+description = "fontconfig"
 [[tasks.config]]
-shell = """
-# Symlinks
-sudo ln -sfv /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
-sudo ln -sfv /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
-sudo ln -sfv /etc/fonts/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d
+description = "Ensure symlinks exist"
+shell = '''
+for LINK in 11-lcdfilter-default.conf 10-sub-pixel-rgb.conf 10-hinting-slight.conf; do
+  if [ ! -L "/etc/fonts/conf.d/$LINK" ]; then
+    sudo ln -sfv "/etc/fonts/conf.avail/$LINK" /etc/fonts/conf.d
+  fi
+done
 # sudo ln -sfv /etc/fonts/conf.avail/30-infinality-aliases.conf /etc/fonts/conf.d
-"""
+'''
 [[tasks.remove]]
-shell = """
-# Symlinks
-sudo rm -f /etc/fonts/conf.d/11-lcdfilter-default.conf
-sudo rm -f /etc/fonts/conf.d/10-sub-pixel-rgb.conf
-sudo rm -f /etc/fonts/conf.d/10-hinting-slight.conf
+description = "Remove symlinks"
+shell = '''
+for LINK in 11-lcdfilter-default.conf 10-sub-pixel-rgb.conf 10-hinting-slight.conf; do
+  if [ -L "/etc/fonts/conf.d/$LINK" ]; then
+    sudo rm -f "/etc/fonts/conf.d/$LINK"
+  fi
+done
 # sudo rm -f /etc/fonts/conf.d/30-infinality-aliases.conf
-"""
+'''
 hook = "pre"
