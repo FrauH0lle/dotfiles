@@ -59,8 +59,8 @@
  llm
  (lookup +dictionary +docsets)
  ;; (lsp +eglot +lsp-flymake)
- ;; lsp
- (lsp +lsp-flymake)
+ lsp
+ ;; (lsp +lsp-flymake)
  ;; pdf
 
  :os

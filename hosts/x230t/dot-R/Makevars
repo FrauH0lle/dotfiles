@@ -1,3 +1,0 @@
-MAKEFLAGS=-j32
-CFLAGS=-O3 -Wall -pedantic -march=native -mtune=native -pipe -fopenmp
-CXXFLAGS=-O3 -Wall -pedantic -march=native -mtune=native -pipe -fopenmp

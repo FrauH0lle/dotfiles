@@ -1,8 +1,0 @@
-# Latest kernel
-sys-kernel/gentoo-kernel-bin
-virtual/dist-kernel
-
-sys-kernel/modprobed-db
-
-# Rust
-dev-util/rustup
