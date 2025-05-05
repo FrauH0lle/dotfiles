@@ -33,6 +33,7 @@ shell = '''
 mkdir -p "$HOME/.config/zsh/completions"
 dotdeploy completions -s zsh > "$HOME/.config/zsh/completions"/_dotdeploy
 '''
+hook = "pre"
 
 [[tasks]]
 description = "Zsh setup and maintenance"
@@ -41,6 +42,14 @@ description = "Ensure .zshenv symlink exists"
 shell = '''
 ln -svf "$HOME"/.zshenv "$HOME"/.config/zsh/.zshenv
 '''
+[[tasks.update]]
+description = "Reset zgenom"
+shell = '''
+if [ -f "$HOME/.local/share/zgenom/zgenom.zsh" ]; then
+  zsh -c "source $HOME/.local/share/zgenom/zgenom.zsh && zgenom reset"
+fi
+'''
+hook = "post"
 [[tasks.remove]]
 shell = '''
 rm -f "$HOME"/.zshenv

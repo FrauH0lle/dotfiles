@@ -41,6 +41,7 @@ shell = """
 curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl -o "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
 chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
 """
+hook = "pre"
 [[tasks.update]]
 description = "Ensure tealdear zsh completions are up-to-date"
 shell = """
@@ -48,6 +49,7 @@ mkdir -p "$HOME/.config/zsh/completions"
 curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_zsh -o "$HOME/.config/zsh/completions"/_tldr
 """
 if = "(contains 'shell/zsh' DOD_MODULES)"
+hook = "pre"
 [[tasks.update]]
 description = "Ensure tealdear bash completions are up-to-date"
 shell = """
@@ -55,6 +57,7 @@ mkdir -p "$HOME/.local/share/bash-completion/completions"
 curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_bash -o "$HOME/.local/share/bash-completion/completions"/tldr.bash
 """
 if = "(contains 'shell/bash' DOD_MODULES)"
+hook = "pre"
 [[tasks.remove]]
 description = "Remove tealdear and completions"
 shell = """
@@ -77,5 +80,6 @@ fi
 description = "Ensure direnv is up-to-date"
 shell = """
 curl -LsSf https://github.com/direnv/direnv/releases/latest/download/direnv.linux-amd64 -o "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
-chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv
+chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
 """
+hook = "pre"
