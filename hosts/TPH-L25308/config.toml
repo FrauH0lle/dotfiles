@@ -1,0 +1,37 @@
+## Modules
+
+depends_on = [
+  "base",
+  "shell/bash",
+  "shell/zsh",
+  "editors/emacs",
+  "dev/R",
+]
+
+## Config to include
+
+includes = [
+  "$DOD_HOSTS_ROOT/shared/env-sh.toml",
+]
+
+## Files to generate
+
+[[generators]]
+source = "fzf.sh"
+target = "$HOME/.fzf.sh"
+shebang = "#!/bin/sh"
+
+[[generators]]
+source = "aliases.sh"
+target = "$HOME/.aliases.sh"
+shebang = "#!/bin/sh"
+
+[[generators]]
+source = "completions.sh"
+target = "$HOME/.completions.sh"
+shebang = "#!/bin/sh"
+
+## Context variables for template expansion
+
+[context_vars]
+ncpu = "14"

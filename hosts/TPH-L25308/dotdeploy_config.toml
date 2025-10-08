@@ -1,0 +1,2 @@
+install_pkg_cmd = ["sudo", "dnf", "install", "-y"]
+remove_pkg_cmd = ["sudo", "dnf", "remove", "-y"]
