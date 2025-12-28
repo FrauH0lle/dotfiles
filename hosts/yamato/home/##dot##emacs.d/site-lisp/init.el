@@ -1,7 +1,5 @@
 ;; site-lisp/init.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
-(setenv "LSP_USE_PLISTS" "1")
-
 (modules!
 
  :completion
@@ -41,19 +39,20 @@
  :emacs
  electric
  eshell
- undo
- ;; org
+ ibuffer
  (org
   +dragndrop
   +jupyter
   ;; +pandoc
   +pretty
   +present)
+ undo
  vc
 
  :tools
  (eval +overlay)
- (magit +forge)
+ magit
+ debugger
  direnv
  editorconfig
  llm
@@ -70,7 +69,7 @@
  ;; common-lisp
  data
  emacs-lisp
- (ess +lsp)
+ (ess +lsp +tree-sitter)
  ;; (latex
  ;;  +fold
  ;;  +latexmk)

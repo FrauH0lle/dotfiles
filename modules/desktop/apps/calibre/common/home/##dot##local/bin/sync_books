@@ -9,7 +9,7 @@
 SOURCE="$HOME/Bücher/"
 
 # Ziel des Backups auf dem entfernten Rechner.
-TARGET="$HOME/Dokumente/Bücher/"
+TARGET="$HOME/Nextcloud/Dokumente/Bücher/"
 
 # Parameter zum Synchronisieren
 # --delete bewirkt ein Datenabgleich inklusive Löschen auf dem Backupmedium
