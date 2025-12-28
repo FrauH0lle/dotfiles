@@ -33,6 +33,23 @@ includes = [
 install = [ "dotdeploy/host-yamato" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [
+  "borgmatic",
+  # borgmatic optional
+  "opt:python-pyfuse3",
+  "nextcloud-client",
+  "keepassxc",
+  "input-remapper-git",
+  # input-remapper optional
+  "opt:xorg-xmodmap",
+  # sdboot-up
+  # sys-kernel/modprobed-db
+  "strawberry"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+
 ## Files
 
 # Host portage and package configuration
