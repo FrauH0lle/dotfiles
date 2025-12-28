@@ -5,19 +5,19 @@ depends_on = [
   "shell/bash",
   "shell/zsh",
   "desktop/plasma",
-  "desktop/apps/calibre",
-  "desktop/apps/libreoffice",
-  "desktop/fonts",
-  "desktop/spelling",
+  # "desktop/apps/calibre",
+  # "desktop/apps/libreoffice",
+  # "desktop/fonts",
+  # "desktop/spelling",
   "editors/emacs",
-  "hardware/hp-printer",
-  "dev/R",
-  "dev/rust",
-  "dev/containers",
-  "services/samba",
-  "vm/virtualbox",
-  "browsers/vivaldi",
-  "backup/snapper"
+  # "hardware/hp-printer",
+  # "dev/R",
+  # "dev/rust",
+  # "dev/containers",
+  # "services/samba",
+  # "vm/virtualbox",
+  # "browsers/vivaldi",
+  # "backup/snapper"
 ]
 
 ## Config to include

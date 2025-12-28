@@ -3,6 +3,41 @@
 install = [ "dotdeploy/desktop-plasma" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [
+  # Meta packages/groups
+  "kde-utilities",
+  # ark optional
+  "opt:7zip",
+  "opt:arj",
+  "opt:lrzip",
+  "opt:lzop",
+  "opt:unarchiver",
+  "opt:unrar",
+  "kde-system",
+  # Evolution PIM
+  "evolution",
+  "evolution-ews",
+  # Themes
+  "papirus-icon-theme",
+  # Flatpak
+  "xdg-desktop-portal-gtk",
+  # Firefox
+  "firefox",
+  "jdownloader2"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+# # KDE tools
+# RDEPEND="
+# 	${RDEPEND}
+# 	kde-misc/kdeconnect
+# 	kde-misc/skanlite
+# 	kde-apps/kdenetwork-filesharing
+# 	kde-apps/gwenview
+# 	kde-apps/okular
+# "
+
 # Files
 # Package configuration
 [[files]]

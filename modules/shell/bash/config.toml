@@ -5,6 +5,14 @@ depends_on = [ "shell/common" ]
 install = [ "dotdeploy/shell-bash" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [
+  "bash",
+  "bash-completion"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+
 # Files
 [[files]]
 source = "gentoo/portage/*"

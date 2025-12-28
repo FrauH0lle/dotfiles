@@ -5,6 +5,27 @@ includes = [ { files = ["gentoo_local_repo.toml"], if = "(eq DOD_DISTRIBUTION_NA
 install = [ "dotdeploy/base" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [
+  "git",
+  # Cron daemon
+  "cronie",
+  # SSH
+  "sshfs",
+  # File systems
+  "btrfs-progs",
+  "dosfstools",
+  "exfatprogs",
+  "mtools",
+  "ntfs-3g",
+  # System tools
+  "htop",
+  "nano",
+  "cpupower",
+  "terminus-font"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 [[files]]
 # Package configuration

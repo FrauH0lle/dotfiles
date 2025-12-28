@@ -7,6 +7,26 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 install = [ "dotdeploy-editors-emacs" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
+[[packages]]
+install = [
+  "emacs-wayland",
+  # Faster greping
+  "ripgrep",
+  # Faster projectile indexing
+  "fd",
+  # Copy to clipboard
+  "xclip",
+  # Module dependencies
+  # :lang latex & :emacs org
+  "texlive",
+  "texlive-lang",
+  # :tools editorconfig
+  "editorconfig-core-c",
+  # :tools pdf-tools
+  "poppler"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 # Package configuration
 [[files]]
