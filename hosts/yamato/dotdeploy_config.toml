@@ -1,2 +1,2 @@
-install_pkg_cmd = [ "sudo", "emerge", "--verbose", "--changed-use", "--deep" ]
-remove_pkg_cmd = [ "sudo", "emerge", "--deselect" ]
+install_pkg_cmd = [ "/home/roland/.dotfiles/scripts/paru_install.sh" ]
+remove_pkg_cmd = [ "/home/roland/.dotfiles/scripts/paru_install.sh", "--remove" ]

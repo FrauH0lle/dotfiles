@@ -7,6 +7,13 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 install = [ "dotdeploy-dev-r" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
+[[packages]]
+install = [
+  "r",
+  "opt:blas-openblas", "opt:gcc-fortran", "opt:texlive-latex"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 
 # Package configuration

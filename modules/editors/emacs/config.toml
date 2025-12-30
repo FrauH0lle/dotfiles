@@ -18,12 +18,13 @@ install = [
   "xclip",
   # Module dependencies
   # :lang latex & :emacs org
-  "texlive",
-  "texlive-lang",
+  "texlive", "texlive-lang",
   # :tools editorconfig
   "editorconfig-core-c",
   # :tools pdf-tools
-  "poppler"
+  "poppler",
+  # :checkers spell
+  "enchant"
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
@@ -39,6 +40,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 [[files]]
 source = "common/home/*"
 target = "$HOME/*"
+phase = "config"
 
 # Actions
 [[tasks]]
@@ -56,6 +58,7 @@ description = "Emacs"
 description = "Install config"
 exec = "$DOD_DOTFILES_ROOT/scripts/ensure_repo.sh"
 args = [ "git@github.com:FrauH0lle/emacs.d.git", "~/.emacs.d" ]
+hook = "pre"
 
 [[messages]]
 message = """

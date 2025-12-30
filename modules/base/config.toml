@@ -7,22 +7,20 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[packages]]
 install = [
+  "linux", "linux-lts", "linux-headers", "linux-lts-headers",
+  "mold",
+  "ccache",
   "git",
   # Cron daemon
   "cronie",
   # SSH
   "sshfs",
   # File systems
-  "btrfs-progs",
-  "dosfstools",
-  "exfatprogs",
-  "mtools",
-  "ntfs-3g",
+  "btrfs-progs", "dosfstools", "exfatprogs", "mtools", "ntfs-3g",
   # System tools
-  "htop",
-  "nano",
-  "cpupower",
-  "terminus-font"
+  "htop", "nano", "cpupower", "terminus-font", "man-db", "man-pages", "texinfo",
+  "rsync",
+  "reflector"
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
@@ -35,7 +33,33 @@ phase = "setup"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+# Files
+[[files]]
+# Package configuration
+source = "reflector.conf"
+target = "/etc/xdg/reflector/reflector.conf"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Tasks
+
+[[tasks]]
+description = "Reflector"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+[[tasks.config]]
+description = "Ensure reflector.timer is enabled"
+shell = """
+if ! systemctl is-enabled --quiet reflector.timer; then
+  sudo systemctl enable --now reflector.timer
+fi
+"""
+[[tasks.remove]]
+description = "Disable reflector.timer"
+shell = """
+sudo systemctl disable --now reflector.timer
+"""
+
 # Necessary base setup, needs to run early
 [[tasks]]
 description = "Gentoo base setup"

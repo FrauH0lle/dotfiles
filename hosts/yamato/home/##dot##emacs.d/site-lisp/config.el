@@ -5,7 +5,7 @@
 
 ;;;; Set font
 
-(setq zenit-font (font-spec :family "Aporetic Serif Mono" :size 18 :weight 'regular)
+(setq zenit-font (font-spec :family "Aporetic Serif Mono" :size 16 :weight 'regular)
       ;; zenit-font (font-spec :family "Iosevka Comfy" :size 18 :weight 'regular)
       zenit-serif-font "Aporetic Serif"
       zenit-variable-pitch-font "Aporetic Sans")

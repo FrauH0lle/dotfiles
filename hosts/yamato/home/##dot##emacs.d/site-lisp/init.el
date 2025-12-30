@@ -63,7 +63,7 @@
  ;; pdf
 
  :os
- gentoo
+ ;; gentoo
 
  :lang
  ;; common-lisp

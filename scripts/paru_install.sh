@@ -31,7 +31,7 @@ ensure_paru() {
   # Create temporary directory
   local temp_dir
   temp_dir=$(mktemp -d)
-  trap 'rm -rf "$temp_dir"' EXIT
+  # trap 'rm -rf "$temp_dir"' EXIT
 
   dod::log-info "Cloning paru from GitHub..."
   git clone https://aur.archlinux.org/paru.git "$temp_dir/paru"
@@ -104,14 +104,14 @@ main() {
     # Install regular packages
     if [[ ${#regular_pkgs[@]} -gt 0 ]]; then
       dod::log-info "Installing regular packages: ${regular_pkgs[*]}"
-      paru -S --noconfirm "${regular_pkgs[@]}"
+      paru -S --needed --noconfirm "${regular_pkgs[@]}"
       dod::log-ok "Regular packages installed"
     fi
 
     # Install optional packages as dependencies
     if [[ ${#optional_pkgs[@]} -gt 0 ]]; then
       dod::log-info "Installing optional packages as dependencies: ${optional_pkgs[*]}"
-      paru -S --asdeps --noconfirm "${optional_pkgs[@]}"
+      paru -S --needed --asdeps --noconfirm "${optional_pkgs[@]}"
       dod::log-ok "Optional packages installed as dependencies"
     fi
 

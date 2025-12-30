@@ -8,15 +8,7 @@ install = [ "dotdeploy-shell-common" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
 [[packages]]
-install = [
-  "bat",
-  "eza",
-  "fd",
-  "fzf",
-  "tree",
-  "tealdeer",
-  "direnv"
-]
+install = [ "bat", "eza", "fd", "fzf", "tree", "tealdeer", "direnv" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 [[tasks]]

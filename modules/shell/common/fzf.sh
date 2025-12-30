@@ -1,3 +1,14 @@
+{{#if (eq DOD_DISTRIBUTION_NAME 'arch')}}
+if [ "$IS_ZSH" = "true" ]; then
+    source /usr/share/fzf/completion.zsh
+    source /usr/share/fzf/key-bindings.zsh
+fi
+
+if [ "$IS_BASH" = "true" ]; then
+    source /usr/share/fzf/completion.bash
+    source /usr/share/fzf/key-bindings.bash
+fi
+{{/if}}
 {{#if (eq DOD_DISTRIBUTION_NAME 'gentoo')}}
 if [ "$IS_ZSH" = "true" ]; then
     source /usr/share/zsh/site-functions/_fzf
@@ -27,7 +38,7 @@ export FZF_DEFAULT_COMMAND='fd -H -I'
 export FZF_DEFAULT_COMMAND='fdfind -H -I'
 {{/if}}
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-{{#if (eq DOD_DISTRIBUTION_NAME 'gentoo')}}
+{{#if (or (eq DOD_DISTRIBUTION_NAME 'gentoo') (eq DOD_DISTRIBUTION_NAME 'arch'))}}
 export FZF_CTRL_T_OPTS="--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
 export FZF_ALT_C_COMMAND='fd -H -I --type d'
 export FZF_ALT_C_OPTS="--preview 'eza --long --tree --level=1 --color=auto --icons=auto --group-directories-first -- {}'"

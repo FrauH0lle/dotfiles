@@ -7,6 +7,13 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 install = [ "dotdeploy-dev-containers" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
+[[packages]]
+install = [
+  "podman", "opt:podman-compose", "opt:podman-docker", "distrobox",
+  "devcontainer-cli"
+  ]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 
 # Package configuration

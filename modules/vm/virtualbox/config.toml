@@ -3,6 +3,13 @@
 install = [ "dotdeploy/vm-virtualbox" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [
+  "virtualbox", "virtualbox-host-dkms", "virtualbox-ext-oracle",
+  "virtualbox-guest-iso"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Deploy
 [[tasks]]
 description = "virtualbox"

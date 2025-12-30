@@ -2,3 +2,10 @@
 [[packages]]
 install = [ "dotdeploy/desktop-spelling" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+
+[[packages]]
+install = [
+  "aspell-de", "aspell-en", "hunspell-de", "hunspell-en_us", "hunspell-en_gb",
+  "hyphen-de", "hyphen-en", "mythes-de", "mythes-en", "enchant"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"

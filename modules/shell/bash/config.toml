@@ -6,10 +6,7 @@ install = [ "dotdeploy/shell-bash" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[packages]]
-install = [
-  "bash",
-  "bash-completion"
-]
+install = [ "bash", "bash-completion" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 

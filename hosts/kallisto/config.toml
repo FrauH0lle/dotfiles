@@ -6,7 +6,7 @@ depends_on = [
   "shell/zsh",
   "desktop/plasma",
   "desktop/apps/calibre",
-  "desktop/apps/libreoffice",
+  # "desktop/apps/libreoffice",
   "desktop/fonts",
   "desktop/spelling",
   "editors/emacs",
@@ -16,7 +16,7 @@ depends_on = [
   "dev/containers",
   "services/samba",
   "vm/virtualbox",
-  "browsers/vivaldi",
+  # "browsers/vivaldi",
   "backup/snapper"
 ]
 
@@ -33,7 +33,69 @@ includes = [
 install = [ "dotdeploy/host-kallisto" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [
+  "nextcloud-client", "keepassxc",
+  "input-remapper-git",
+  # input-remapper optional
+  "opt:xorg-xmodmap",
+  "strawberry",
+  # Bootloader management
+  "limine-mkinitcpio-hook",
+  "limine-snapper-sync"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 ## Files
+
+# Host makepkg and pacman configuration
+[[files]]
+source = "arch/makepkg.conf"
+target = "/etc/makepkg.conf"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/makepkg.conf.d/*"
+target = "/etc/makepkg.conf.d/*"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/pacman.conf"
+target = "/etc/pacman.conf"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/mkinitcpio.conf"
+target = "/etc/mkinitcpio.conf"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/mkinitcpio.conf.d/*"
+target = "/etc/mkinitcpio.conf.d/*"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/limine"
+target = "/etc/default/limine"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "paru.conf"
+target = "$HOME/.config/paru.conf"
+phase = "setup"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 # Host portage and package configuration
 [[files]]

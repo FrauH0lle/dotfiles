@@ -3,6 +3,10 @@
 install = [ "dotdeploy/services-samba" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [ "samba", "wsdd" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 # Package configuration
 [[files]]
@@ -19,13 +23,20 @@ phase = "setup"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[files]]
+source = "samba_config/etc/*"
+target = "/etc/*"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 [[tasks]]
 description = "Samba"
 [[tasks.config]]
 description = "Add $USER to Samba usershare group and activate sysusers"
 shell = '''
-if ! id -nG "$USER" | grep -qw sambashares; then
-  sudo gpasswd -a "$USER" sambashares
+if ! id -nG "$USER" | grep -qw sambashare; then
+  sudo gpasswd -a "$USER" sambashare
   sudo systemd-sysusers
 fi
 '''
@@ -49,8 +60,8 @@ hook = "pre"
 [[tasks.remove]]
 description = "Remove $USER from Samba usershare group"
 shell = '''
-if id -nG "$USER" | grep -qw sambashares; then
-  sudo gpasswd -d "$USER" sambashares
+if id -nG "$USER" | grep -qw sambashare; then
+  sudo gpasswd -d "$USER" sambashare
 fi
 
 sudo systemd-sysusers

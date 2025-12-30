@@ -3,6 +3,10 @@
 install = [ "dotdeploy/desktop-apps-calibre" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [ "calibre", "opt:poppler", "python-fonttools" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 # Package configuration
 [[files]]

@@ -8,23 +8,22 @@ install = [
   # Meta packages/groups
   "kde-utilities",
   # ark optional
-  "opt:7zip",
-  "opt:arj",
-  "opt:lrzip",
-  "opt:lzop",
-  "opt:unarchiver",
-  "opt:unrar",
+  "opt:7zip", "opt:arj", "opt:lrzip", "opt:lzop", "opt:unarchiver", "opt:unrar",
   "kde-system",
+  "gwenview",
+  "kdeconnect",
+  "kdenetwork-filesharing",
   # Evolution PIM
-  "evolution",
-  "evolution-ews",
+  "evolution", "evolution-ews", "gnome-keyring", "libgnome-keyring",
   # Themes
   "papirus-icon-theme",
   # Flatpak
   "xdg-desktop-portal-gtk",
   # Firefox
   "firefox",
-  "jdownloader2"
+  "jdownloader2",
+  "octopi",
+  "vlc", "vlc-plugins-all"
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 

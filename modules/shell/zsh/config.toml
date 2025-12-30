@@ -6,10 +6,7 @@ install = [ "dotdeploy/shell-zsh" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[packages]]
-install = [
-  "zsh",
-  "zsh-completions"
-]
+install = [ "zsh", "zsh-completions" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 # Files

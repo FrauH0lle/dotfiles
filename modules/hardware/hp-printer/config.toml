@@ -3,6 +3,14 @@
 install = [ "dotdeploy/hardware-hp-printer" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [
+  "hplip", "hplip-plugin",
+  "opt:cups", "opt:sane", "opt:python-pillow", "opt:python-reportlab",
+  "opt:rpcbind", "opt:python-pyqt5", "opt:libusb", "opt:wget"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 # Package configuration
 [[files]]

@@ -1,0 +1,158 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 56,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 8,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "key(Control_L).key(Alt_L).modify(ISO_Level3_Shift,h(7))",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Control_L",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 56,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Alt_L",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 56,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 9,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "key(Control_L).key(Alt_L).modify(ISO_Level3_Shift,h(8))",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 56,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 10,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "key(Control_L).key(Alt_L).modify(ISO_Level3_Shift,h(9))",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 56,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 11,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "key(Control_L).key(Alt_L).modify(ISO_Level3_Shift,h(0))",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 56,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 27,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "key(Control_L).key(Alt_L).modify(ISO_Level3_Shift,h(plus))",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 56,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            },
+            {
+                "type": 1,
+                "code": 12,
+                "origin_hash": "6a008e55eb041f61c14e47b7aa9e0a09"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "key(Control_L).key(Alt_L).modify(ISO_Level3_Shift,h(ssharp))",
+        "mapping_type": "key_macro"
+    }
+]

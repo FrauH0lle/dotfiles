@@ -3,6 +3,10 @@
 install = [ "dotdeploy/dev-rust" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+# [[packages]]
+# install = [ "rustup" ]
+# if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 # Package configuration
 [[files]]
@@ -14,6 +18,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[tasks]]
 description = "Rust setup"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 [[tasks.config]]
 description = "Install Cargo"
 shell = '''

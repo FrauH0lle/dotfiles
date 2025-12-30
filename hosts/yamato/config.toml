@@ -5,19 +5,19 @@ depends_on = [
   "shell/bash",
   "shell/zsh",
   "desktop/plasma",
-  # "desktop/apps/calibre",
+  "desktop/apps/calibre",
   # "desktop/apps/libreoffice",
-  # "desktop/fonts",
-  # "desktop/spelling",
+  "desktop/fonts",
+  "desktop/spelling",
   "editors/emacs",
-  # "hardware/hp-printer",
-  # "dev/R",
-  # "dev/rust",
-  # "dev/containers",
-  # "services/samba",
-  # "vm/virtualbox",
+  "hardware/hp-printer",
+  "dev/R",
+  "dev/rust",
+  "dev/containers",
+  "services/samba",
+  "vm/virtualbox",
   # "browsers/vivaldi",
-  # "backup/snapper"
+  "backup/snapper"
 ]
 
 ## Config to include
@@ -38,19 +38,68 @@ install = [
   "borgmatic",
   # borgmatic optional
   "opt:python-pyfuse3",
-  "nextcloud-client",
-  "keepassxc",
+  "nextcloud-client", "keepassxc",
   "input-remapper-git",
   # input-remapper optional
   "opt:xorg-xmodmap",
-  # sdboot-up
-  # sys-kernel/modprobed-db
-  "strawberry"
+  "strawberry",
+  # Bootloader management
+  "limine-mkinitcpio-hook",
+  "limine-snapper-sync"
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 
 ## Files
+
+# Host makepkg and pacman configuration
+[[files]]
+source = "arch/makepkg.conf"
+target = "/etc/makepkg.conf"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/makepkg.conf.d/*"
+target = "/etc/makepkg.conf.d/*"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/pacman.conf"
+target = "/etc/pacman.conf"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/mkinitcpio.conf"
+target = "/etc/mkinitcpio.conf"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/mkinitcpio.conf.d/*"
+target = "/etc/mkinitcpio.conf.d/*"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "arch/limine"
+target = "/etc/default/limine"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[files]]
+source = "paru.conf"
+target = "$HOME/.config/paru.conf"
+phase = "setup"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 # Host portage and package configuration
 [[files]]

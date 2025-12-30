@@ -3,6 +3,10 @@
 install = [ "dotdeploy/backup-snapper" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [ "snapper" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 [[files]]
 source = "gentoo/portage/*"
@@ -13,6 +17,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[tasks]]
 description = "snapper"
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 [[tasks.config]]
 description = "Enable services and GRUB integration"
 shell = '''
