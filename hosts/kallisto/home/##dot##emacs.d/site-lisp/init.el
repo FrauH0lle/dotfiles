@@ -36,7 +36,9 @@
 
  :emacs
  eshell
- org
+ ibuffer
+ (org +pretty)
+ tramp
  undo
  vc
 
@@ -55,7 +57,7 @@
  :lang
  data
  emacs-lisp
- (ess +lsp)
+ (ess +lsp +tree-sitter)
  ;; (latex
  ;;  +fold
  ;;  +latexmk)
