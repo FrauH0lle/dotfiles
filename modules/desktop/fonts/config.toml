@@ -3,6 +3,12 @@
 install = [ "dotdeploy/desktop-fonts" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
+[[packages]]
+install = [
+  "ttf-symbola"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 # Files
 [[files]]
 source = "common/etc/*"
