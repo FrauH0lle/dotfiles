@@ -24,7 +24,8 @@ depends_on = [
 
 includes = [
   "$DOD_HOSTS_ROOT/shared/env-sh.toml",
-  "$DOD_HOSTS_ROOT/shared/fstrim.toml"
+  "$DOD_HOSTS_ROOT/shared/fstrim.toml",
+  "$DOD_HOSTS_ROOT/shared/hosts.toml"
 ]
 
 ## Packages
@@ -97,7 +98,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 [[files]]
 source = "paru.conf"
-target = "$HOME/.config/paru.conf"
+target = "$HOME/.config/paru/paru.conf"
 phase = "setup"
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 

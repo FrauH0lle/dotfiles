@@ -63,6 +63,7 @@
  ;; pdf
 
  :os
+ arch-linux
  ;; gentoo
 
  :lang

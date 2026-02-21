@@ -43,7 +43,7 @@
  vc
 
  :os
- gentoo
+ arch-linux
 
  :tools
  eval

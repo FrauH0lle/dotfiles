@@ -1,0 +1,6 @@
+[[files]]
+source = "$DOD_HOSTS_ROOT/shared/hosts"
+target = "/etc/hosts"
+type = "copy"
+template = true
+permissions = "644"
