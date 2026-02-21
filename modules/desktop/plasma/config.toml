@@ -13,6 +13,8 @@ install = [
   "gwenview",
   "kdeconnect",
   "kdenetwork-filesharing",
+  "okular",
+  "opt:geoclue",
   # Evolution PIM
   "evolution", "evolution-ews", "gnome-keyring", "libgnome-keyring",
   # Themes
