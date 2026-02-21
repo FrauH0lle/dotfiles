@@ -4,7 +4,7 @@ install = [ "dotdeploy/services-samba" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[packages]]
-install = [ "samba", "wsdd" ]
+install = [ "samba", "wsdd", "avahi", "opt:nss-mdns" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 # Files
@@ -30,6 +30,13 @@ phase = "setup"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
+[[files]]
+source = "nsswitch.conf"
+target = "/etc/nsswitch.conf"
+phase = "setup"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
 [[tasks]]
 description = "Samba"
 [[tasks.config]]
@@ -39,6 +46,16 @@ if ! id -nG "$USER" | grep -qw sambashare; then
   sudo gpasswd -a "$USER" sambashare
   sudo systemd-sysusers
 fi
+'''
+[[tasks.config]]
+description = "Ensure Avahi service is running"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+shell = '''
+for SERVICE in avahi-daemon.socket; do
+  if ! systemctl is-enabled --quiet "$SERVICE"; then
+    sudo systemctl enable --now "$SERVICE"
+  fi
+done
 '''
 [[tasks.config]]
 description = "Ensure Samba services are running"
@@ -53,6 +70,15 @@ done
 description = "Stop Samba services"
 shell = '''
 for SERVICE in smb wsdd; do
+  sudo systemctl disable --now "$SERVICE"
+done
+'''
+hook = "pre"
+[[tasks.remove]]
+description = "Stop Avahi services"
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+shell = '''
+for SERVICE in avahi-daemon.socket; do
   sudo systemctl disable --now "$SERVICE"
 done
 '''
