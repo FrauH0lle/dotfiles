@@ -43,7 +43,11 @@ install = [
   "strawberry",
   # Bootloader management
   "limine-mkinitcpio-hook",
-  "limine-snapper-sync"
+  "limine-snapper-sync",
+  # Laptop power management
+  "tlp", "tlp-rdw", "tlp-pd",
+  "opt:ethtool", "opt:smartmontools"
+
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
@@ -117,6 +121,25 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 [[files]]
 source = "home/*"
 target = "$HOME/*"
+
+[[tasks]]
+description = "TLP"
+[[tasks.config]]
+description = "Activate TLP services"
+shell = """
+if ! systemctl is-enabled --quiet tlp.service tlp-pd.service; then
+  sudo systemctl enable --now tlp.service tlp-pd.service
+fi
+sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
+"""
+[[tasks.remove]]
+description = "Deactivate TLP services"
+shell = """
+sudo systemctl disable --now tlp.service tlp-pd.service
+sudo systemctl unmask systemd-rfkill.service systemd-rfkill.socket
+"""
+hook = "pre"
+
 
 ## Files to generate
 
