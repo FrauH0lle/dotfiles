@@ -28,6 +28,18 @@ ensure_paru() {
     dod::log-ok "base-devel installed"
   fi
 
+  if dod::check_uncallable mold; then
+    dod::log-info "mold not found, installing..."
+    sudo pacman -S --noconfirm mold || { dod::log-fail "Failed to install mold"; exit 1; }
+    dod::log-ok "mold installed"
+  fi
+
+  if dod::check_uncallable ccache; then
+    dod::log-info "ccache not found, installing..."
+    sudo pacman -S --noconfirm ccache || { dod::log-fail "Failed to install ccache"; exit 1; }
+    dod::log-ok "ccache installed"
+  fi
+
   # Create temporary directory
   local temp_dir
   temp_dir=$(mktemp -d)
