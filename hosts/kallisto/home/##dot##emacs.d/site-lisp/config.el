@@ -4,10 +4,8 @@
 ;;; UI
 
 ;; Set font
-(setq zenit-font (font-spec :family "Iosevka Comfy" :size 18 :weight 'regular)
-      ;; zenit-serif-font (font-spec :family "InputSerifNarrow NF")
-      zenit-serif-font (font-spec :family "Iosevka Comfy Motion")
-      zenit-variable-pitch-font (font-spec :family "Iosevka Comfy Motion Duo"))
+(setq zenit-font (font-spec :family "Aporetic Serif Mono" :size 16 :weight 'regular)
+      zenit-variable-pitch-font (font-spec :family "Aporetic Serif"))
 
 ;;; Set theme
 ;; (setq zenit-theme 'doom-one)
