@@ -1,9 +1,4 @@
-#
 ## Packages
-
-[[packages]]
-install = [ "dotdeploy/dev-R" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[packages]]
 install = [ "dotdeploy-dev-r" ]
@@ -21,16 +16,7 @@ install = [ "R-devel" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 
 
-#
 ## Files
-
-# Package configuration
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 [[files]]
 source = "Makevars"

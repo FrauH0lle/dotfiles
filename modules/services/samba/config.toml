@@ -1,27 +1,11 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/services-samba" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
 install = [ "samba", "wsdd", "avahi", "opt:nss-mdns" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Files
-# Package configuration
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-[[files]]
-source = "gentoo/samba_config/etc/*"
-target = "/etc/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Files
 
 [[files]]
 source = "samba_config/etc/*"
@@ -36,6 +20,9 @@ target = "/etc/nsswitch.conf"
 phase = "setup"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+
+## Tasks
 
 [[tasks]]
 description = "Samba"

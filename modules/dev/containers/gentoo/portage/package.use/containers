@@ -1,6 +1,0 @@
-net-firewall/iptables nftables
-# Docker CLI
-app-containers/podman wrapper
-
-# app-containers/devcontainer
-net-libs/nodejs npm

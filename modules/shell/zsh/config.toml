@@ -1,26 +1,21 @@
 depends_on = [ "shell/common" ]
 
-# Packages
-[[packages]]
-install = [ "dotdeploy/shell-zsh" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+
+## Packages
 
 [[packages]]
 install = [ "zsh", "zsh-completions" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Files
-# Package configuration
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+
+## Files
 
 [[files]]
 source = "common/home/*"
 target = "$HOME/*"
+
+
+## Tasks
 
 [[tasks]]
 description = "dotdeploy"

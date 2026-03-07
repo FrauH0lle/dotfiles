@@ -2,6 +2,3 @@
 .idea
 *.log
 tmp/
-
-# Gentoo repository metadata
-packages/gentoo/overlay/metadata/md5-cache/

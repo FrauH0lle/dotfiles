@@ -1,7 +1,4 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/shell-common" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
 install = [ "dotdeploy-shell-common" ]
@@ -11,14 +8,13 @@ if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 install = [ "bat", "eza", "fd", "fzf", "tree", "tealdeer", "direnv" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# TLDR
 
-[[includes]]
-files = [ "get_tldr.toml" ]
-if = "(contains DOD_DISTRIBUTION_NAME 'gentoo')"
+## Includes
+
+# TLDR
+# [[includes]]
+# files = [ "get_tldr.toml" ]
 
 # Direnv
-
-[[includes]]
-files = [ "get_direnv.toml" ]
-if = "(contains DOD_DISTRIBUTION_NAME 'gentoo')"
+# [[includes]]
+# files = [ "get_direnv.toml" ]

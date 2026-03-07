@@ -1,0 +1,7 @@
+## Files
+
+[[files]]
+source = "wsl-binfmt.conf"
+target = "/etc/binfmt.d/WSLInterop.conf"
+type = "copy"
+if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"

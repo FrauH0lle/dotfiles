@@ -1,0 +1,2 @@
+install_pkg_cmd = ["sudo", "apt-get", "install", "-y"]
+remove_pkg_cmd = ["sudo", "apt-get", "remove", "-y"]

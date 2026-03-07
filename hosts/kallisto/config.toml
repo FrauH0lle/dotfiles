@@ -20,6 +20,7 @@ depends_on = [
   "backup/snapper"
 ]
 
+
 ## Config to include
 
 [[includes]]
@@ -37,11 +38,8 @@ if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 [[includes]]
 files = [ "tlp.toml" ]
 
-## Packages
 
-[[packages]]
-install = [ "dotdeploy/host-kallisto" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
 install = [
@@ -60,22 +58,14 @@ install = [
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-## Files
 
-# Host portage and package configuration
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Files
 
 # System tweaks
 [[files]]
-source = "gentoo/tweaks/*"
+source = "tweaks/*"
 target = "/etc/*"
 type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Host specific dotfiles
 [[files]]

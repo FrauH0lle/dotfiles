@@ -1,11 +1,4 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/editors-emacs" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-
-[[packages]]
-install = [ "dotdeploy-editors-emacs" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
+## Packages
 
 [[packages]]
 install = [
@@ -43,21 +36,17 @@ install = [
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 
-# Files
-# Package configuration
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+
+## Files
 
 [[files]]
 source = "common/home/*"
 target = "$HOME/*"
 phase = "config"
 
-# Actions
+
+## Tasks
+
 [[tasks]]
 description = "Enable latest Emacs PPA"
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"

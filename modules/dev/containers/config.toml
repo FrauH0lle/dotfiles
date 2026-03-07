@@ -1,30 +1,27 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/dev-containers" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
-install = [ "dotdeploy-dev-containers" ]
+install = [ "podman", "distrobox", "flatpak" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
 [[packages]]
 install = [
   "podman", "opt:podman-compose", "opt:podman-docker", "distrobox",
-  "devcontainer-cli"
+  "devcontainer-cli", "flatpak"
   ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Files
 
-# Package configuration
+## Files
+
 [[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+source = "distrobox/*"
+target = "$HOME/distrobox/*"
+phase = "config"
 
-# Actions
+
+## Actions
+
 [[tasks]]
 description = "Enable latest Distrobox PPA"
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
@@ -33,7 +30,7 @@ shell = "$DOD_DOTFILES_ROOT/scripts/ensure_ppa.sh michel-slm/distrobox"
 [[tasks.remove]]
 shell = "sudo add-apt-repository --remove ppa:michel-slm/distrobox"
 
-# Deploy
+# Podman setup
 [[tasks]]
 description = "podman"
 [[tasks.config]]
@@ -52,9 +49,20 @@ else
   sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$USER"
 fi
 '''
+[[tasks.config]]
+description = "Enable podman socket"
+shell = '''
+if ! systemctl is-enabled podman.socket > /dev/null 2>&1; then
+  systemctl --user enable --now podman.socket
+fi
+'''
+hook = "post"
 [[tasks.remove]]
 description = "Remove subordinate UID/GIDs for $USER"
-shell = """
-sudo usermod --del-subuids 100000-165535 --del-subgids 100000-165535 "$USER"
-"""
+shell = '''
+sudo usermod --del-subuids 100000-165535 --del-subgids 100000-165535 "$USER" || exit 0
+'''
 hook = "pre"
+[[tasks.remove]]
+description = "Disable podman socket"
+shell = "systemctl --user disable --now podman.socket"

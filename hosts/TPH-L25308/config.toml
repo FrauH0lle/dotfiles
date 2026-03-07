@@ -1,14 +1,15 @@
-## Modules
-
-depends_on = [
-  "base",
-  "shell/bash",
-  "shell/zsh",
-  "editors/emacs",
-  "dev/R",
-]
-
 ## Config to include
+
+# Ubuntu WSL config
+[[includes]]
+files = [ "ubuntu-wsl.toml" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
+
+# Fedora container config
+[[includes]]
+files = [ "fedora-container.toml" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
+
 
 [[includes]]
 files = [

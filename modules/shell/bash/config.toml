@@ -1,9 +1,7 @@
 depends_on = [ "shell/common" ]
 
-# Packages
-[[packages]]
-install = [ "dotdeploy/shell-bash" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+
+## Packages
 
 [[packages]]
 install = [ "bash", "bash-completion" ]
@@ -13,7 +11,9 @@ if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 install = [ "bash", "bash-completion" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 
-# Files
+
+## Files
+
 [[files]]
 source = "gentoo/portage/*"
 target = "/etc/portage/*"
@@ -28,6 +28,9 @@ target = "$HOME/.bash_profile"
 [[files]]
 source = "bashrc"
 target = "$HOME/.bashrc"
+
+
+## Tasks
 
 [[tasks]]
 description = "dotdeploy"

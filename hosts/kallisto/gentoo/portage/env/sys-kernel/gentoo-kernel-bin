@@ -1,5 +1,0 @@
-post_pkg_postinst() {
-    ebegin "Copying kernels from /boot to/ /boot/efi/"
-	sdboot-up
-	eend ${?} || ewarn "Failed to copy kernels"
-}

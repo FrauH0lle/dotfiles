@@ -1,7 +1,4 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/hardware-hp-printer" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
 install = [
@@ -11,20 +8,15 @@ install = [
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Files
-# Package configuration
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-# Includes
+## Includes
+
 [[includes]]
 files = [ "cups.toml" ]
 
-# Tasks
+
+## Tasks
+
 [[tasks]]
 [[tasks.config]]
 description = "Add $USER to printer groups"

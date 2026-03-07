@@ -64,7 +64,6 @@
 
  :os
  arch-linux
- ;; gentoo
 
  :lang
  ;; common-lisp

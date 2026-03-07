@@ -1,15 +1,9 @@
 [[includes]]
-files = [ "gentoo_local_repo.toml" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-
-[[includes]]
 files = [ "reflector.toml" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Packages
-[[packages]]
-install = [ "dotdeploy/base" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+
+## Packages
 
 [[packages]]
 install = [
@@ -30,36 +24,12 @@ install = [
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Files
-[[files]]
-# Package configuration
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-# Files
+## Files
+
 [[files]]
-# Package configuration
 source = "reflector.conf"
 target = "/etc/xdg/reflector/reflector.conf"
 phase = "setup"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-
-# Tasks
-
-[[tasks]]
-description = "Gentoo base setup"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-[[tasks.setup]]
-exec = "$DOD_DOTFILES_ROOT/scripts/gentoo_base_setup.sh"
-hook = "pre"
-
-[[tasks]]
-description = "Ubuntu base setup"
-if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
-[[tasks.setup]]
-exec = "$DOD_DOTFILES_ROOT/scripts/prepare_system.sh"
-hook = "pre"

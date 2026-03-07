@@ -33,20 +33,6 @@ function is_container() {
     fi
   fi
 
-  # Check for Docker container
-  if [ -f /.dockerenv ]; then
-    # Try to get container name from /proc/self/cgroup
-    if [ -f /proc/self/cgroup ]; then
-      container_name=$(grep 'docker' /proc/self/cgroup | tail -1 | sed 's/.*\/\([0-9a-f]\{12,\}\).*/\1/' | cut -c1-12)
-      if [ -z "$container_name" ]; then
-        # Fallback to hostname which is often the container name
-        container_name=$(hostname)
-      fi
-    else
-      container_name=$(hostname)
-    fi
-  fi
-
   # Check for container environment variable
   if [ -z "$container_name" ] && [ -n "${container:-}" ]; then
     container_name="${container}"
@@ -101,10 +87,6 @@ shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
-
-# This requires https://forums.gentoo.org/viewtopic-t-1085654-start-0.html
-# make less more friendly for non-text input files, see lesspipe(1)
-# [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/bash lesspipe)"
 
 
 #

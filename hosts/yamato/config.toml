@@ -37,10 +37,6 @@ if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 ## Packages
 
 [[packages]]
-install = [ "dotdeploy/host-yamato" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-
-[[packages]]
 install = [
   "borgmatic",
   # borgmatic optional
@@ -59,20 +55,11 @@ if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 ## Files
 
-# Host portage and package configuration
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-
 # System tweaks
 [[files]]
-source = "gentoo/tweaks/*"
+source = "tweaks/*"
 target = "/etc/*"
 type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
 # Host specific dotfiles
 [[files]]

@@ -1,7 +1,4 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/desktop-plasma" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
 install = [
@@ -29,31 +26,8 @@ install = [
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# # KDE tools
-# RDEPEND="
-# 	${RDEPEND}
-# 	kde-misc/kdeconnect
-# 	kde-misc/skanlite
-# 	kde-apps/kdenetwork-filesharing
-# 	kde-apps/gwenview
-# 	kde-apps/okular
-# "
 
-# Files
-# Package configuration
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Includes
 
-[[files]]
-source = "49-wheel.rules"
-target = "/etc/etc/polkit-1/rules.d/49-wheel.rules"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-
-# Includes
 [[includes]]
 files = [ "pipewire.toml", "flathub.toml" ]

@@ -1,21 +1,12 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/backup-snapper" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
 install = [ "snapper" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Files
-[[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-# Includes
+## Includes
+
 [[includes]]
 files = [ "snapper.toml" ]
 

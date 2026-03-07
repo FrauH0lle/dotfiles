@@ -1,7 +1,4 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/desktop-fonts" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
 install = [
@@ -9,13 +6,17 @@ install = [
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Files
+
+## Files
+
 [[files]]
 source = "common/etc/*"
 target = "/etc/*"
 phase = "config"
 type = "copy"
 
-# Includes
+
+## Includes
+
 [[includes]]
 files = [ "fontconfig.toml" ]

@@ -1,7 +1,4 @@
-# Packages
-[[packages]]
-install = [ "dotdeploy/vm-virtualbox" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+## Packages
 
 [[packages]]
 install = [
@@ -10,7 +7,9 @@ install = [
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Deploy
+
+## Tasks
+
 [[tasks]]
 description = "virtualbox"
 [[tasks.config]]

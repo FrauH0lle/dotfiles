@@ -37,6 +37,6 @@ phase = "setup"
 type = "copy"
 
 [[files]]
-source = "paru.conf"
+source = "$DOD_HOSTS_ROOT/shared/paru.conf"
 target = "$HOME/.config/paru/paru.conf"
 phase = "setup"
