@@ -17,7 +17,7 @@ if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 
 [[includes]]
 files = [ "get_direnv.toml" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
+if = "(contains DOD_DISTRIBUTION_NAME 'ubuntu' 'fedora')"
 
 # TLDR
 [[includes]]
