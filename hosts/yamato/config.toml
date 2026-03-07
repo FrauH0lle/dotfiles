@@ -22,11 +22,17 @@ depends_on = [
 
 ## Config to include
 
-includes = [
+[[includes]]
+files = [
   "$DOD_HOSTS_ROOT/shared/env-sh.toml",
   "$DOD_HOSTS_ROOT/shared/fstrim.toml",
-  "$DOD_HOSTS_ROOT/shared/hosts.toml"
+  "$DOD_HOSTS_ROOT/shared/hosts.toml",
+  "$DOD_HOSTS_ROOT/shared/generators.toml"
 ]
+
+[[includes]]
+files = [ "$DOD_HOSTS_ROOT/shared/arch-system.toml" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 ## Packages
 
@@ -53,55 +59,6 @@ if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 ## Files
 
-# Host makepkg and pacman configuration
-[[files]]
-source = "arch/makepkg.conf"
-target = "/etc/makepkg.conf"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-
-[[files]]
-source = "arch/makepkg.conf.d/*"
-target = "/etc/makepkg.conf.d/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-
-[[files]]
-source = "arch/pacman.conf"
-target = "/etc/pacman.conf"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-
-[[files]]
-source = "arch/mkinitcpio.conf"
-target = "/etc/mkinitcpio.conf"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-
-[[files]]
-source = "arch/mkinitcpio.conf.d/*"
-target = "/etc/mkinitcpio.conf.d/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-
-[[files]]
-source = "arch/limine"
-target = "/etc/default/limine"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-
-[[files]]
-source = "paru.conf"
-target = "$HOME/.config/paru/paru.conf"
-phase = "setup"
-if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-
 # Host portage and package configuration
 [[files]]
 source = "gentoo/portage/*"
@@ -121,23 +78,6 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 [[files]]
 source = "home/*"
 target = "$HOME/*"
-
-## Files to generate
-
-[[generators]]
-source = "fzf.sh"
-target = "$HOME/.fzf.sh"
-shebang = "#!/bin/sh"
-
-[[generators]]
-source = "aliases.sh"
-target = "$HOME/.aliases.sh"
-shebang = "#!/bin/sh"
-
-[[generators]]
-source = "completions.sh"
-target = "$HOME/.completions.sh"
-shebang = "#!/bin/sh"
 
 ## Context variables for template expansion
 

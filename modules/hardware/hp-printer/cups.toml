@@ -1,0 +1,16 @@
+# CUPS printing service
+
+[[tasks]]
+description = "CUPS"
+[[tasks.config]]
+description = "Enable CUPS service"
+shell = """
+if ! systemctl is-enabled --quiet cups.socket; then
+  sudo systemctl enable --now cups.socket
+fi
+"""
+[[tasks.remove]]
+description = "Disable CUPS service"
+shell = """
+sudo systemctl disable --now cups.socket
+"""

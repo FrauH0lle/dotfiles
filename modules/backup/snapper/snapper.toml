@@ -1,0 +1,21 @@
+# Snapper Btrfs snapshot management
+
+[[tasks]]
+description = "snapper"
+[[tasks.config]]
+description = "Enable services and GRUB integration"
+shell = '''
+for SERVICE in snapper-cleanup.timer snapper-timeline.timer; do
+  if ! systemctl is-enabled --quiet "$SERVICE"; then
+    sudo systemctl enable --now "$SERVICE"
+  fi
+done
+'''
+[[tasks.remove]]
+description = "Disable services and GRUB integration"
+shell = """
+for SERVICE in snapper-cleanup.timer snapper-timeline.timer; do
+  sudo systemctl disable --now "$SERVICE"
+done
+"""
+hook = "pre"

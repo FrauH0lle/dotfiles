@@ -75,7 +75,7 @@
  ;;  +fold
  ;;  +latexmk)
  markdown
- (python +lsp +tree-sitter +pyright)
+ (python +lsp +tree-sitter)
  (rust +lsp +tree-sitter)
  (sh +lsp +tree-sitter)
 

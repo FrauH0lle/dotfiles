@@ -54,34 +54,6 @@ target = "/etc/etc/polkit-1/rules.d/49-wheel.rules"
 type = "copy"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 
-# Actions
-# Deployment
-[[tasks]]
-description = "Pipewire"
-[[tasks.config]]
-shell = """
-# Activate pipewire
-systemctl --user enable --now pipewire.socket pipewire-pulse.socket wireplumber.service
-"""
-[[tasks.remove]]
-shell = """
-systemctl --user disable --now pipewire.socket pipewire-pulse.socket wireplumber.service
-"""
-hook = "pre"
-
-# Removal
-[[tasks]]
-description = "Flathub"
-[[tasks.config]]
-description = "Add repository"
-shell = '''
-if ! flatpak remotes | grep -q "flathub"; then
-  sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-fi
-'''
-[[tasks.remove]]
-description = "Remove repository"
-shell = """
-sudo flatpak remote-delete flathub
-"""
-hook = "pre"
+# Includes
+[[includes]]
+files = [ "pipewire.toml", "flathub.toml" ]

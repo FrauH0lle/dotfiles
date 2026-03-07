@@ -1,0 +1,42 @@
+# Install and maintain tldr/tealdear
+
+[[tasks]]
+description = "tealdear"
+[[tasks.config]]
+description = "Ensure tealdear is installed"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "install", "tealdeer-rs/tealdeer", "tealdeer-linux-x86_64-musl", "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr", "--executable" ]
+[[tasks.config]]
+description = "Ensure tealdear bash completions are installed"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "install", "tealdeer-rs/tealdeer", "completions_bash", "$HOME/.local/share/bash-completion/completions/tldr.bash" ]
+if = "(contains 'shell/bash' DOD_MODULES)"
+[[tasks.config]]
+description = "Ensure tealdear zsh completions are installed"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "install", "tealdeer-rs/tealdeer", "completions_zsh", "$HOME/.config/zsh/completions/_tldr" ]
+if = "(contains 'shell/zsh' DOD_MODULES)"
+[[tasks.update]]
+description = "Ensure tealdear is up-to-date"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "update", "tealdeer-rs/tealdeer", "tealdeer-linux-x86_64-musl", "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr", "--executable" ]
+hook = "pre"
+[[tasks.update]]
+description = "Ensure tealdear zsh completions are up-to-date"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "update", "tealdeer-rs/tealdeer", "completions_zsh", "$HOME/.config/zsh/completions/_tldr" ]
+if = "(contains 'shell/zsh' DOD_MODULES)"
+hook = "pre"
+[[tasks.update]]
+description = "Ensure tealdear bash completions are up-to-date"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "update", "tealdeer-rs/tealdeer", "completions_bash", "$HOME/.local/share/bash-completion/completions/tldr.bash" ]
+if = "(contains 'shell/bash' DOD_MODULES)"
+hook = "pre"
+[[tasks.remove]]
+description = "Remove tealdear and completions"
+shell = '''
+rm -f "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
+rm -f "$HOME/.local/share/bash-completion/completions"/tldr.bash
+rm -f "$HOME/.config/zsh/completions"/_tldr
+'''

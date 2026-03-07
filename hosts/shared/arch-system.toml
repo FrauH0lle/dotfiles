@@ -1,0 +1,42 @@
+# Arch Linux system configuration files
+
+[[files]]
+source = "arch/makepkg.conf"
+target = "/etc/makepkg.conf"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "arch/makepkg.conf.d/*"
+target = "/etc/makepkg.conf.d/*"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "arch/pacman.conf"
+target = "/etc/pacman.conf"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "arch/mkinitcpio.conf"
+target = "/etc/mkinitcpio.conf"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "arch/mkinitcpio.conf.d/*"
+target = "/etc/mkinitcpio.conf.d/*"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "arch/limine"
+target = "/etc/default/limine"
+phase = "setup"
+type = "copy"
+
+[[files]]
+source = "paru.conf"
+target = "$HOME/.config/paru/paru.conf"
+phase = "setup"

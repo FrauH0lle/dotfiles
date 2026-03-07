@@ -1,0 +1,16 @@
+# Shell helper scripts
+
+[[generators]]
+source = "fzf.sh"
+target = "$HOME/.fzf.sh"
+shebang = "#!/bin/sh"
+
+[[generators]]
+source = "aliases.sh"
+target = "$HOME/.aliases.sh"
+shebang = "#!/bin/sh"
+
+[[generators]]
+source = "completions.sh"
+target = "$HOME/.completions.sh"
+shebang = "#!/bin/sh"

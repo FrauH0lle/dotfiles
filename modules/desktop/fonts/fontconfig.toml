@@ -1,0 +1,23 @@
+# Fontconfig tuning
+
+[[tasks]]
+description = "fontconfig"
+[[tasks.config]]
+description = "Ensure symlinks exist"
+shell = '''
+for LINK in 11-lcdfilter-default.conf 10-sub-pixel-rgb.conf 10-hinting-slight.conf; do
+  if [ ! -L "/etc/fonts/conf.d/$LINK" ]; then
+    sudo ln -sfv "/etc/fonts/conf.avail/$LINK" /etc/fonts/conf.d
+  fi
+done
+'''
+[[tasks.remove]]
+description = "Remove symlinks"
+shell = '''
+for LINK in 11-lcdfilter-default.conf 10-sub-pixel-rgb.conf 10-hinting-slight.conf; do
+  if [ -L "/etc/fonts/conf.d/$LINK" ]; then
+    sudo rm -f "/etc/fonts/conf.d/$LINK"
+  fi
+done
+'''
+hook = "pre"

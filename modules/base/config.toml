@@ -1,4 +1,10 @@
-includes = [ { files = ["gentoo_local_repo.toml"], if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')" } ]
+[[includes]]
+files = [ "gentoo_local_repo.toml" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+
+[[includes]]
+files = [ "reflector.toml" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 # Packages
 [[packages]]
@@ -44,23 +50,6 @@ if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 # Tasks
 
-[[tasks]]
-description = "Reflector"
-if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
-[[tasks.config]]
-description = "Ensure reflector.timer is enabled"
-shell = """
-if ! systemctl is-enabled --quiet reflector.timer; then
-  sudo systemctl enable --now reflector.timer
-fi
-"""
-[[tasks.remove]]
-description = "Disable reflector.timer"
-shell = """
-sudo systemctl disable --now reflector.timer
-"""
-
-# Necessary base setup, needs to run early
 [[tasks]]
 description = "Gentoo base setup"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"

@@ -1,0 +1,16 @@
+# Reflector - Arch Linux mirror list updater
+
+[[tasks]]
+description = "Reflector"
+[[tasks.config]]
+description = "Ensure reflector.timer is enabled"
+shell = """
+if ! systemctl is-enabled --quiet reflector.timer; then
+  sudo systemctl enable --now reflector.timer
+fi
+"""
+[[tasks.remove]]
+description = "Disable reflector.timer"
+shell = """
+sudo systemctl disable --now reflector.timer
+"""

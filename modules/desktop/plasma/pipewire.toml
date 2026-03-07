@@ -1,0 +1,13 @@
+# Pipewire audio server
+
+[[tasks]]
+description = "Pipewire"
+[[tasks.config]]
+shell = """
+systemctl --user enable --now pipewire.socket pipewire-pulse.socket wireplumber.service
+"""
+[[tasks.remove]]
+shell = """
+systemctl --user disable --now pipewire.socket pipewire-pulse.socket wireplumber.service
+"""
+hook = "pre"

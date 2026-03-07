@@ -1,0 +1,13 @@
+# Install and maintain direnv
+
+[[tasks]]
+description = "direnv"
+[[tasks.config]]
+description = "Ensure direnv is installed"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "install", "direnv/direnv", "direnv.linux-amd64", "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv", "--executable" ]
+[[tasks.update]]
+description = "Ensure direnv is up-to-date"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "update", "direnv/direnv", "direnv.linux-amd64", "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv", "--executable" ]
+hook = "pre"

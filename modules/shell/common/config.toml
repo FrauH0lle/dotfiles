@@ -11,106 +11,14 @@ if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 install = [ "bat", "eza", "fd", "fzf", "tree", "tealdeer", "direnv" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-[[packages]]
-install = [ "bat", "ripgrep", "fd-find", "fzf", "tree" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
+# TLDR
 
-[[tasks]]
-description = "eza"
-if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
-[[tasks.config]]
-description = "Ensure eza is installed"
-shell = """
-if [ ! -f "${XDG_BIN_HOME:-$HOME/.local/bin}/eza" ]; then
-  curl -LsSf https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-musl.tar.gz | tar xvz -C "${XDG_BIN_HOME:-$HOME/.local/bin}"
-  chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/eza"
-fi
-"""
-[[tasks.update]]
-description = "Ensure eza is up-to-date"
-shell = """
-curl -LsSf https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-musl.tar.gz | tar xvz -C "${XDG_BIN_HOME:-$HOME/.local/bin}"
-chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/eza"
-"""
-hook = "pre"
+[[includes]]
+files = [ "get_tldr.toml" ]
+if = "(contains DOD_DISTRIBUTION_NAME 'gentoo')"
 
-[[tasks]]
-description = "tealdear"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-[[tasks.config]]
-description = "Ensure tealdear is installed"
-shell = """
-if [ ! -f "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr" ]; then
-  curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl -o "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
-  chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
-fi
-"""
-[[tasks.config]]
-description = "Ensure tealdear bash completions are installed"
-shell = """
-mkdir -p "$HOME/.local/share/bash-completion/completions"
-if [ ! -f "$HOME/.local/share/bash-completion/completions"/tldr.bash ]; then
-  curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_bash -o "$HOME/.local/share/bash-completion/completions"/tldr.bash
-fi
-"""
-if = "(and (contains 'shell/bash' DOD_MODULES) (eq DOD_DISTRIBUTION_NAME 'gentoo'))"
-[[tasks.config]]
-description = "Ensure tealdear zsh completions are installed"
-shell = """
-mkdir -p "$HOME/.config/zsh/completions"
-if [ ! -f "$HOME/.config/zsh/completions"/_tldr ]; then
-  curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_zsh -o "$HOME/.config/zsh/completions"/_tldr
-fi
-"""
-if = "(and (contains 'shell/zsh' DOD_MODULES) (eq DOD_DISTRIBUTION_NAME 'gentoo'))"
-[[tasks.update]]
-description = "Ensure tealdear is up-to-date"
-shell = """
-curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/tealdeer-linux-x86_64-musl -o "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
-chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
-"""
-hook = "pre"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-[[tasks.update]]
-description = "Ensure tealdear zsh completions are up-to-date"
-shell = """
-mkdir -p "$HOME/.config/zsh/completions"
-curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_zsh -o "$HOME/.config/zsh/completions"/_tldr
-"""
-if = "(and (contains 'shell/zsh' DOD_MODULES) (eq DOD_DISTRIBUTION_NAME 'gentoo'))"
-hook = "pre"
-[[tasks.update]]
-description = "Ensure tealdear bash completions are up-to-date"
-shell = """
-mkdir -p "$HOME/.local/share/bash-completion/completions"
-curl -LsSf https://github.com/tealdeer-rs/tealdeer/releases/latest/download/completions_bash -o "$HOME/.local/share/bash-completion/completions"/tldr.bash
-"""
-if = "(and (contains 'shell/bash' DOD_MODULES) (eq DOD_DISTRIBUTION_NAME 'gentoo'))"
-hook = "pre"
-[[tasks.remove]]
-description = "Remove tealdear and completions"
-shell = """
-rm -f "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr"
-rm -f "$HOME/.local/share/bash-completion/completions"/tldr.bash
-rm -f "$HOME/.config/zsh/completions"/_tldr
-"""
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
+# Direnv
 
-[[tasks]]
-description = "direnv"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-[[tasks.config]]
-description = "Ensure direnv is installed"
-shell = """
-if [ ! -f "${XDG_BIN_HOME:-$HOME/.local/bin}/tldr" ]; then
-  curl -LsSf https://github.com/direnv/direnv/releases/latest/download/direnv.linux-amd64 -o "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
-  chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
-fi
-"""
-[[tasks.update]]
-description = "Ensure direnv is up-to-date"
-shell = """
-curl -LsSf https://github.com/direnv/direnv/releases/latest/download/direnv.linux-amd64 -o "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
-chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/direnv"
-"""
-hook = "pre"
+[[includes]]
+files = [ "get_direnv.toml" ]
+if = "(contains DOD_DISTRIBUTION_NAME 'gentoo')"
