@@ -1,20 +1,30 @@
 ## Packages
 
 [[packages]]
-install = [ "dotdeploy-shell-common" ]
+install = [ "bat", "eza", "fd-find", "fzf", "tree", "tealdeer" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 
 [[packages]]
 install = [ "bat", "eza", "fd", "fzf", "tree", "tealdeer", "direnv" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
+[[packages]]
+install = [ "bat", "eza", "fd-find", "fzf", "tree" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
+
 
 ## Includes
 
+[[includes]]
+files = [ "get_direnv.toml" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
+
 # TLDR
-# [[includes]]
-# files = [ "get_tldr.toml" ]
+[[includes]]
+files = [ "get_tldr.toml" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 
 # Direnv
-# [[includes]]
-# files = [ "get_direnv.toml" ]
+[[includes]]
+files = [ "get_eza.toml" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"

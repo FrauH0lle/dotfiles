@@ -31,6 +31,7 @@ install = [
   "xclip",
   "wl-clipboard",
   "texlive-scheme-medium",
+  "editorconfig",
   # LSP server installs
   "nodejs"
 ]
@@ -46,15 +47,6 @@ phase = "config"
 
 
 ## Tasks
-
-[[tasks]]
-description = "Enable latest Emacs PPA"
-if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
-[[tasks.setup]]
-exec = "$DOD_DOTFILES_ROOT/scripts/ensure_ppa.sh"
-args = [ "ubuntuhandbook1/emacs" ]
-[[tasks.remove]]
-shell = "sudo add-apt-repository --remove ppa:ubuntuhandbook1/emacs"
 
 [[tasks]]
 description = "Emacs"

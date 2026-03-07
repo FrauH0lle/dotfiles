@@ -15,13 +15,6 @@ if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 ## Files
 
 [[files]]
-source = "gentoo/portage/*"
-target = "/etc/portage/*"
-phase = "setup"
-type = "copy"
-if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
-
-[[files]]
 source = "bash_profile"
 target = "$HOME/.bash_profile"
 

@@ -2,5 +2,6 @@ depends_on = [
   "base",
   "shell/bash",
   "editors/emacs",
-  "dev/R"
+  "dev/R",
+  "dev/python"
 ]

@@ -1,10 +1,6 @@
 ## Packages
 
 [[packages]]
-install = [ "dotdeploy-dev-r" ]
-if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
-
-[[packages]]
 install = [
   "r",
   "opt:blas-openblas", "opt:gcc-fortran", "opt:texlive-latex"
