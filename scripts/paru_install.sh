@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+# Exit on error
+set -e
+# Exit on unset variable
+set -u
+# Exit on errors in pipes
+set -o pipefail
+# Inherit ERR traps
+set -E
 
 # Source lib.sh for helper functions
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
