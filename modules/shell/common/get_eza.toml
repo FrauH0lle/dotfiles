@@ -1,0 +1,13 @@
+# Install and maintain eza
+
+[[tasks]]
+description = "eza"
+[[tasks.config]]
+description = "Ensure eza is installed"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "install", "eza-community/eza", "eza_x86_64-unknown-linux-musl.tar.gz", "${XDG_BIN_HOME:-$HOME/.local/bin}/eza", "--extract", "--executable" ]
+[[tasks.update]]
+description = "Ensure eza is up-to-date"
+exec = "$DOD_DOTFILES_ROOT/scripts/download_github.sh"
+args = [ "update", "eza-community/eza", "eza_x86_64-unknown-linux-musl.tar.gz", "${XDG_BIN_HOME:-$HOME/.local/bin}/eza", "--extract", "--executable" ]
+hook = "pre"
