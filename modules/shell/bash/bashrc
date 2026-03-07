@@ -12,34 +12,76 @@ IS_ZSH="false"
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-    *) return;;
+  *i*) ;;
+  *) return;;
 esac
 
 # Prompt
+
+function is_container() {
+  if [ ! -f /run/.containerenv ] && [ ! -f /.dockerenv ] && [ -z "${container:-}" ]; then
+    return
+  fi
+
+  local container_name=""
+
+  # Check for Podman/Toolbox container
+  if [ -f /run/.containerenv ]; then
+    container_name=$(cat /run/.containerenv | grep -oP '(?<=name=")[^";]+' 2>/dev/null)
+    if [ -z "$container_name" ]; then
+      container_name=$(cat /run/.containerenv | grep '^name=' | cut -d= -f2 | tr -d '"')
+    fi
+  fi
+
+  # Check for Docker container
+  if [ -f /.dockerenv ]; then
+    # Try to get container name from /proc/self/cgroup
+    if [ -f /proc/self/cgroup ]; then
+      container_name=$(grep 'docker' /proc/self/cgroup | tail -1 | sed 's/.*\/\([0-9a-f]\{12,\}\).*/\1/' | cut -c1-12)
+      if [ -z "$container_name" ]; then
+        # Fallback to hostname which is often the container name
+        container_name=$(hostname)
+      fi
+    else
+      container_name=$(hostname)
+    fi
+  fi
+
+  # Check for container environment variable
+  if [ -z "$container_name" ] && [ -n "${container:-}" ]; then
+    container_name="${container}"
+  fi
+
+  # If we found a container name, display it
+  if [ -n "$container_name" ]; then
+    echo "[ ${container_name} ]"
+  fi
+}
+
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+  xterm-color|*-256color) color_prompt=yes;;
 esac
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1="\[\033[01;32m\]\u@\h\[\033[00m\]$(is_container):\[\033[01;34m\]\w\[\033[00m\]\$ "
 else
-    PS1='\u@\h:\w\$ '
+  PS1="\u@\h$(is_container):\w\$ "
 fi
 unset color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-    xterm*|rxvt*)
-        PS1="\[\e]0;\u@\h: \w\a\]$PS1"
-        ;;
-    # Set prompt for Emacs TRAMP
-    dumb)
-        PS1="> "
-        ;;
-    *)
-        ;;
+  xterm*|rxvt*)
+    PS1="\[\e]0;\u@\h$(is_container): \w\a\]$PS1"
+    ;;
+  # Set prompt for Emacs TRAMP
+  dumb)
+    PS1="> "
+    ;;
+  *)
+    ;;
 esac
+unset is_container
 
 # Don't put duplicate lines or lines starting with space in the history. See
 # bash(1) for more options
@@ -80,3 +122,13 @@ export EDITOR
 
 unset IS_BASH
 unset IS_ZSH
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+  for rc in ~/.bashrc.d/*; do
+    if [ -f "$rc" ]; then
+      . "$rc"
+    fi
+  done
+fi
+unset rc

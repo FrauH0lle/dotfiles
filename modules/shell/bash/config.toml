@@ -9,6 +9,9 @@ if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
 install = [ "bash", "bash-completion" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
+[[packages]]
+install = [ "bash", "bash-completion" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 
 # Files
 [[files]]

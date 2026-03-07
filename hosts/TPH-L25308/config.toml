@@ -14,6 +14,11 @@ includes = [
   "$DOD_HOSTS_ROOT/shared/env-sh.toml",
 ]
 
+## Packages
+
+[[packages]]
+install = [ "fuse-sshfs" ]
+
 ## Files to generate
 
 [[generators]]

@@ -1,4 +1,6 @@
-# Packages
+#
+## Packages
+
 [[packages]]
 install = [ "dotdeploy/dev-R" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
@@ -14,7 +16,13 @@ install = [
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
-# Files
+[[packages]]
+install = [ "R-devel" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
+
+
+#
+## Files
 
 # Package configuration
 [[files]]

@@ -15,7 +15,7 @@ install = [
   # Faster projectile indexing
   "fd",
   # Copy to clipboard
-  "xclip",
+  "xclip", "wl-clipboard",
   # Module dependencies
   # :lang latex & :emacs org
   "texlive", "texlive-lang",
@@ -24,9 +24,24 @@ install = [
   # :tools pdf-tools
   "poppler",
   # :checkers spell
-  "enchant"
+  "enchant",
+  # :tools lsp
+  "npm"
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[packages]]
+install = [
+  "emacs",
+  "ripgrep",
+  "fd-find",
+  "xclip",
+  "wl-clipboard",
+  "texlive-scheme-medium",
+  # LSP server installs
+  "nodejs"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 
 # Files
 # Package configuration

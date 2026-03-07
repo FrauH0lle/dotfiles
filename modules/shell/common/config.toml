@@ -11,6 +11,29 @@ if = "(eq DOD_DISTRIBUTION_NAME 'ubuntu')"
 install = [ "bat", "eza", "fd", "fzf", "tree", "tealdeer", "direnv" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
+[[packages]]
+install = [ "bat", "ripgrep", "fd-find", "fzf", "tree" ]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
+
+[[tasks]]
+description = "eza"
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
+[[tasks.config]]
+description = "Ensure eza is installed"
+shell = """
+if [ ! -f "${XDG_BIN_HOME:-$HOME/.local/bin}/eza" ]; then
+  curl -LsSf https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-musl.tar.gz | tar xvz -C "${XDG_BIN_HOME:-$HOME/.local/bin}"
+  chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/eza"
+fi
+"""
+[[tasks.update]]
+description = "Ensure eza is up-to-date"
+shell = """
+curl -LsSf https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-musl.tar.gz | tar xvz -C "${XDG_BIN_HOME:-$HOME/.local/bin}"
+chmod +x "${XDG_BIN_HOME:-$HOME/.local/bin}/eza"
+"""
+hook = "pre"
+
 [[tasks]]
 description = "tealdear"
 if = "(eq DOD_DISTRIBUTION_NAME 'gentoo')"
