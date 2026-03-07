@@ -1,0 +1,23 @@
+## uv - Python package installer
+
+[[tasks]]
+description = "uv"
+[[tasks.config]]
+description = "Install uv if not present"
+shell = '''
+if [ ! -f "${XDG_BIN_HOME:-$HOME/.local/bin}/uv" ]; then
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+fi
+'''
+[[tasks.update]]
+description = "Update uv"
+shell = "uv self update"
+[[tasks.remove]]
+description = "Remove uv"
+shell = '''
+uv cache clean
+rm -rf "$(uv python dir)"
+rm -rf "$(uv tool dir)"
+rm -f "${XDG_BIN_HOME:-$HOME/.local/bin}/uv"
+rm -f "${XDG_BIN_HOME:-$HOME/.local/bin}/uvx"
+'''
