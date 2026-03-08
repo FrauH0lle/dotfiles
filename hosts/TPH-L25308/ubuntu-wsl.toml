@@ -1,5 +1,6 @@
 depends_on = [
   "base",
   "shell/bash",
+  "dev/containers", 
   "vm/wsl",
 ]
