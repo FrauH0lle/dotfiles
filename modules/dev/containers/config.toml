@@ -35,20 +35,7 @@ shell = "sudo add-apt-repository --remove ppa:michel-slm/distrobox"
 description = "podman"
 [[tasks.config]]
 description = "Set subordinate UID/GIDs for $USER"
-shell = '''
-# Set subuid and subgid
-if [ ! -f /etc/subuid ]; then
-  sudo touch /etc/subuid
-fi
-if [ ! -f /etc/subgid ]; then
-  sudo touch /etc/subgid
-fi
-if grep -q "$USER:100000:65536" /etc/subgid; then
-  echo "$USER already set up"
-else
-  sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$USER"
-fi
-'''
+shell = "$DOD_DOTFILES_ROOT/scripts/subid_manager.sh setup"
 [[tasks.config]]
 description = "Enable podman socket"
 shell = '''
@@ -59,10 +46,8 @@ fi
 hook = "post"
 [[tasks.remove]]
 description = "Remove subordinate UID/GIDs for $USER"
-shell = '''
-sudo usermod --del-subuids 100000-165535 --del-subgids 100000-165535 "$USER" || exit 0
-'''
-hook = "pre"
+shell = "$DOD_DOTFILES_ROOT/scripts/subid_manager.sh remove"
+hook = "post"
 [[tasks.remove]]
 description = "Disable podman socket"
 shell = "systemctl --user disable --now podman.socket"
