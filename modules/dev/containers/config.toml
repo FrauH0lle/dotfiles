@@ -20,7 +20,7 @@ target = "$HOME/distrobox/*"
 phase = "config"
 
 
-## Actions
+## Tasks
 
 [[tasks]]
 description = "Enable latest Distrobox PPA"
