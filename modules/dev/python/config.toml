@@ -1,3 +1,10 @@
+## Files
+
+# Direnv uv extension
+[[files]]
+source = "direnv/*"
+target = "$HOME/.config/direnv/lib/*"
+
 ## uv - Python package installer
 
 [[tasks]]
