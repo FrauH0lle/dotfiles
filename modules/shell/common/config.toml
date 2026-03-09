@@ -9,7 +9,7 @@ install = [ "bat", "eza", "fd", "fzf", "tree", "tealdeer", "direnv" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
 [[packages]]
-install = [ "bat", "eza", "fd-find", "fzf", "tree" ]
+install = [ "bat", "fd-find", "fzf", "tree" ]
 if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"
 
 
