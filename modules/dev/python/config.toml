@@ -6,7 +6,7 @@ description = "uv"
 description = "Install uv if not present"
 shell = '''
 if [ ! -f "${XDG_BIN_HOME:-$HOME/.local/bin}/uv" ]; then
-  curl -LsSf https://astral.sh/uv/install.sh | sh
+  curl -LsSf https://astral.sh/uv/install.sh | env UV_NO_MODIFY_PATH=1 sh
 fi
 '''
 [[tasks.update]]
