@@ -5,3 +5,9 @@ depends_on = [
   "dev/R",
   "dev/python"
 ]
+
+
+# Host specific dotfiles
+[[files]]
+source = "home/*"
+target = "$HOME/*"
