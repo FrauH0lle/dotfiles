@@ -6,3 +6,10 @@ install = [
   "hyphen-de", "hyphen-en", "mythes-de", "mythes-en", "enchant"
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
+
+[[packages]]
+install = [
+  "aspell-de", "aspell-en", "hunspell-de", "hunspell-en",
+  "hyphen-de", "hyphen-en", "mythes-de", "mythes-en", "enchant2-devel"
+]
+if = "(eq DOD_DISTRIBUTION_NAME 'fedora')"

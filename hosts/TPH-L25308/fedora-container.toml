@@ -1,6 +1,7 @@
 depends_on = [
   "base",
   "shell/bash",
+  "desktop/spelling",
   "editors/emacs",
   "dev/R",
   "dev/python"
