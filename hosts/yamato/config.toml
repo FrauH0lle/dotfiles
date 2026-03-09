@@ -11,6 +11,7 @@ depends_on = [
   "desktop/spelling",
   "editors/emacs",
   "hardware/hp-printer",
+  "dev/python",
   "dev/R",
   "dev/rust",
   "dev/containers",
