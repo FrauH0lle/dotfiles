@@ -12,3 +12,7 @@ depends_on = [
 [[files]]
 source = "home/*"
 target = "$HOME/*"
+
+[[files]]
+source = "distrobox-host-exec-wrapper.sh"
+target = "$HOME/.local/bin/distrobox-host-exec"
