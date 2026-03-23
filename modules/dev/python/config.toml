@@ -5,8 +5,10 @@
 source = "direnv/*"
 target = "$HOME/.config/direnv/lib/*"
 
-## uv - Python package installer
 
+## Tasks
+
+# uv - Python package installer
 [[tasks]]
 description = "uv"
 [[tasks.config]]
