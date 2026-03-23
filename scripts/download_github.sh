@@ -22,11 +22,11 @@ source "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"/lib.sh
 #   update       - Always download (overwrite if exists)
 #   repo         - GitHub repository in format "owner/repo"
 #   asset_name   - Name of the release asset to download
-#   target       - Full path where to save the file (or directory if --extract)
+#   target       - Full path where to save the file/binary
 #
 # Options:
 #   --executable - Make the downloaded file executable
-#   --extract    - Extract tar.gz archive to target directory
+#   --extract    - Extract tar.gz archive; the binary is placed at <target>
 
 dod::download_github() {
     local subcommand="$1"
@@ -50,14 +50,7 @@ dod::download_github() {
 
     case "$subcommand" in
         install)
-            if [[ "$extract" == true ]]; then
-                # For extracted archives, check if binary exists in target dir
-                local binary_name="${asset_name%%.tar.gz*}"
-                if [[ -f "$target/$binary_name" ]]; then
-                    dod::log-ok "$target/$binary_name already present"
-                    return 0
-                fi
-            elif [[ -f "$target" ]]; then
+            if [[ -f "$target" ]]; then
                 dod::log-ok "$target already present"
                 return 0
             fi
@@ -73,32 +66,43 @@ dod::download_github() {
 
     # Create parent directory if needed
     mkdir -p "$(dirname "$target")"
-    if [[ "$extract" == true ]]; then
-        mkdir -p "$target"
-    fi
 
     dod::log-info "Downloading $asset_name from $repo..."
 
     if [[ "$extract" == true ]]; then
-        # Download and extract tar.gz
-        local tmp_file
+        # Download and extract tar.gz to a temp dir, then move binary to target
+        local tmp_file tmp_dir
         tmp_file="$(mktemp)"
+        tmp_dir="$(mktemp -d)"
         if curl -LsSf "$url" -o "$tmp_file"; then
-            if tar xzf "$tmp_file" -C "$target"; then
-                dod::log-ok "Extracted to $target"
-                if [[ "$executable" == true ]]; then
-                    # Make all extracted files executable
-                    find "$target" -type f -exec chmod +x {} \;
+            if tar xzf "$tmp_file" -C "$tmp_dir"; then
+                # Derive binary name from target path basename
+                local binary_name
+                binary_name="$(basename "$target")"
+
+                # Locate the binary in the extracted tree
+                local found
+                found="$(find "$tmp_dir" -name "$binary_name" -type f | head -n 1)"
+                if [[ -z "$found" ]]; then
+                    dod::log-fail "Could not find '$binary_name' in extracted archive"
+                    rm -rf "$tmp_file" "$tmp_dir"
+                    return 1
                 fi
+
+                mv "$found" "$target"
+                if [[ "$executable" == true ]]; then
+                    chmod +x "$target"
+                fi
+                dod::log-ok "Installed to $target"
             else
                 dod::log-fail "Failed to extract $asset_name"
-                rm -f "$tmp_file"
+                rm -rf "$tmp_file" "$tmp_dir"
                 return 1
             fi
-            rm -f "$tmp_file"
+            rm -rf "$tmp_file" "$tmp_dir"
         else
             dod::log-fail "Failed to download $url"
-            rm -f "$tmp_file"
+            rm -rf "$tmp_file" "$tmp_dir"
             return 1
         fi
     else
