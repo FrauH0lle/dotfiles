@@ -7,7 +7,7 @@
  (corfu +icons)
 
  :ui
- doom-dashboard
+ dashboard
  doom-theming
  hl-todo
  indent-guides
@@ -67,7 +67,7 @@
 
  :lang
  ;; common-lisp
- data
+ (data +tree-sitter +lsp)
  emacs-lisp
  (ess +lsp +tree-sitter)
  ;; (latex

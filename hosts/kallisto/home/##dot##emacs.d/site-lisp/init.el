@@ -7,7 +7,7 @@
  (corfu +icons)
 
  :ui
- doom-dashboard
+ dashboard
  doom-theming
  hl-todo
  indent-guides
