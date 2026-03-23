@@ -1,14 +1,21 @@
 ## Tasks
 
-# [[tasks]]
-# description = "Rust setup"
-# [[tasks.config]]
-# description = "Install Cargo"
-# shell = '''
-# if [ ! -f "$HOME/.cargo/bin/cargo" ]; then
-#   rustup-init -y --no-modify-path
-# fi
-# '''
-# [[tasks.remove]]
-# description = "Remove Cargo"
-# shell = "rm -rf ~/.cargo"
+[[tasks]]
+description = "Rust setup"
+[[tasks.config]]
+description = "Install rustup and Cargo"
+shell = '''
+if [ ! -f "$HOME/.cargo/bin/rustup" ]; then
+  curl -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+fi
+'''
+[[tasks.config]]
+description = "Install rust-analyzer"
+shell = '"$HOME/.cargo/bin/rustup" component add rust-analyzer'
+[[tasks.update]]
+description = "Update Rust toolchain"
+shell = '"$HOME/.cargo/bin/rustup" update'
+hook = "pre"
+[[tasks.remove]]
+description = "Uninstall Rust and rustup"
+shell = '"$HOME/.cargo/bin/rustup" self uninstall -y'
