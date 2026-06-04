@@ -49,7 +49,8 @@ install = [
   "strawberry",
   # Bootloader management
   "limine-mkinitcpio-hook",
-  "limine-snapper-sync"
+  "limine-snapper-sync",
+  "opt:power-profiles-daemon"
 ]
 if = "(eq DOD_DISTRIBUTION_NAME 'arch')"
 
