@@ -52,19 +52,15 @@
  magit
  direnv
  editorconfig
- ;; pdf
 
  :lang
  data
  emacs-lisp
- (ess +lsp +tree-sitter)
- ;; (latex
- ;;  +fold
- ;;  +latexmk)
+ (ess +lsp)
  markdown
  (python +pyright +tree-sitter)
  (rust +lsp +tree-sitter)
- (sh +lsp +tree-sitter)
+ (sh +lsp)
 
  :config
  (default +bindings +smartparens)
