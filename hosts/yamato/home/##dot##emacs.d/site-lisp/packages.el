@@ -5,15 +5,31 @@
 (package! gptel
   :recipe (:local-repo "~/gptel"
            ;; :build (:not compile)
-           )
+           :host github
+           :repo "FrauH0lle/gptel")
   :lockfile tools_llm)
 
 (package! mevedel
   :recipe (:host github
            :repo "FrauH0lle/mevedel"
-           :files ("*.el")
+           :files
+           ("*.el"
+            "agents"
+            "prompts"
+            "skills"
+            "docs"
+            "collaboration"
+            ("shared-editing"
+             "shared-editing/host.bundle.mjs"
+             "shared-editing/resvg.wasm"
+             "shared-editing/font.ttf"
+             "shared-editing/FONT-LICENSE"
+             "shared-editing/THIRD-PARTY-NOTICES.txt"))
            :protocol ssh
            :local-repo "~/Projekte/mevedel"
-           :build (:not compile)
+           ;; :local-repo "~/Projekte/mevedel/.scratch/worktrees/remote-workspaces"
+           ;; Uncomment to load mevedel from source: edits then take effect on
+           ;; reload without a rebuild, at the cost of running interpreted.
+           ;; :build (:not compile)
            )
   :lockfile tools_llm)

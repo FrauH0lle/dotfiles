@@ -42,16 +42,17 @@
  ibuffer
  (org
   +dragndrop
-  +jupyter
+  ;; +jupyter
   ;; +pandoc
   +pretty
   +present)
+ tramp
  undo
  vc
 
  :tools
  (eval +overlay)
- magit
+ (magit +forge)
  debugger
  direnv
  editorconfig
@@ -73,7 +74,7 @@
  ;; (latex
  ;;  +fold
  ;;  +latexmk)
- markdown
+ (markdown +tree-sitter)
  (python +lsp +tree-sitter)
  (rust +lsp +tree-sitter)
  (sh +lsp +tree-sitter)
