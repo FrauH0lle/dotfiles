@@ -10,45 +10,21 @@
 (require 'gptel-request)
 
 (after! mevedel
-  ;; Extend the existing OAuth backend, preserving its authentication headers.
-  ;; Keep the same conservative context budget as the configured Codex models.
-  (let ((backend (gptel-get-backend "Codex")))
-    (dolist (model
-             (gptel--process-models
-              '((gpt-6-sol
-                 :description "GPT-6 model for coding and agentic workflows"
-                 :capabilities (media tool-use json url responses-api)
-                 :reasoning-effort (member none low medium high xhigh max)
-                 :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
-                 :context-window 258
-                 :input-cost 2
-                 :output-cost 10
-                 :cutoff-date "2026-04")
-                (gpt-6-luna
-                 :description "Efficient GPT-6 model for focused tasks"
-                 :capabilities (media tool-use json url responses-api)
-                 :reasoning-effort (member none low medium high xhigh max)
-                 :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
-                 :context-window 258
-                 :input-cost 0.1
-                 :output-cost 0.5
-                 :cutoff-date "2026-05"))))
-      (cl-pushnew model (gptel-backend-models backend))))
 
   (mevedel-define-preset mevedel-gpt6
-    :description "GPT-6: Astra lead, Sol workers, Luna exploration"
+    :description "GPT-6: Sol lead and workers, Astra review, Luna exploration"
     :parents (mevedel-implement)
     :backend "Codex"
-    :model 'gpt-6-astra
-    :reasoning-effort 'medium
+    :model 'gpt-6.1-sol
+    :reasoning-effort 'high
     :model-tiers
-    ((fast :provider "Codex:gpt-6-luna" :effort medium)
-     (balanced :provider "Codex:gpt-6-sol" :effort high)
+    ((fast :provider "Codex:gpt-6-luna" :effort xhigh)
+     (balanced :provider "Codex:gpt-6.1-sol" :effort high)
      (strong :provider "Codex:gpt-6-astra" :effort high))
     :model-workloads
-    ((planning :tier strong)
+    ((planning :tier balanced :effort xhigh)
      (plan-implementation :tier balanced)
-     (goal-review :tier strong)
+     (goal-review :tier balanced :effort xhigh)
      (worker :tier balanced)
      (explorer :tier fast)
      (verifier :tier balanced)
@@ -56,7 +32,7 @@
      (naming :tier fast :effort none)
      (guardian :tier balanced :effort low)
      (buddy :tier balanced :effort medium)
-     (journal :tier strong :effort low)
+     (journal :tier balanced :effort medium)
      (memory :tier balanced :effort medium)
      (summarization :tier balanced :effort medium)))
 

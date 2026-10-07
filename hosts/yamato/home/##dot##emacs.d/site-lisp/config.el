@@ -52,10 +52,69 @@
   (setf (alist-get 'commit-summary gptel--known-presets)
         (zenit-plist-merge '(:backend "GLM" :model 'glm-4.5-air) (alist-get 'commit-summary gptel--known-presets)))
 
-  (setq gptel-model 'deepseek-v4-flash
-        gptel-backend (gptel-make-deepseek "DeepSeek"
-                        :stream t
-                        :key 'gptel-api-key)))
+  ;; CLaude
+  (gptel-make-anthropic "Claude"
+    :stream t
+    :key 'gptel-api-key
+    :request-params '(:thinking (:type "adaptive")))
+
+  (gptel-make-deepseek "DeepSeek"
+    :stream t
+    :key 'gptel-api-key)
+
+  ;; GLM
+  (gptel-make-glm-openai "GLM-coding"
+    :stream t
+    :key 'gptel-api-key
+    :request-params '(:thinking
+                      (:type "enabled"
+                       :clear_thinking :json-false)
+                      :max_tokens 16384
+                      :temperature 0.7))
+
+  (defvar-local +gptel-codex-session-id nil
+    "Session identifier sent to the Codex backend.")
+
+  (defun +gptel--codex-header (info)
+    "Return Codex authentication headers for request INFO."
+    (require 'org-id)
+    (append (gptel--openai-oauth-header info)
+            `(("session-id" .
+               ,(with-current-buffer (plist-get info :buffer)
+                  (or +gptel-codex-session-id
+                      (setq +gptel-codex-session-id (org-id-uuid))))))))
+
+  ;; OpenAI Codex
+  (setq gptel-model 'gpt-6.1-sol
+        gptel-backend (gptel-make-openai-oauth "Codex"
+                        :header #'+gptel--codex-header
+                        :models '((gpt-6-astra
+                                   :description "The very best model for coding and agentic tasks"
+                                   :capabilities (media tool-use json url responses-api)
+                                   :reasoning-effort (member low medium high xhigh max)
+                                   :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+                                   :context-window 258
+                                   :input-cost 10
+                                   :output-cost 50
+                                   :cutoff-date "2026-04")
+                                  (gpt-6.1-sol
+                                   :description "The best model for coding and agentic tasks"
+                                   :capabilities (media tool-use json url responses-api)
+                                   :reasoning-effort (member none low medium high xhigh max)
+                                   :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+                                   :context-window 258
+                                   :input-cost 2
+                                   :output-cost 10
+                                   :cutoff-date "2026-04")
+                                  (gpt-6-luna
+                                   :description "Fastest, cheapest version of GPT-5.6"
+                                   :capabilities (media tool-use json url responses-api)
+                                   :reasoning-effort (member none low medium high xhigh max)
+                                   :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+                                   :context-window 258
+                                   :input-cost 0.1
+                                   :output-cost 0.5
+                                   :cutoff-date "2026-05")))))
 
 (after! mevedel
   (setq mevedel-collaboration-relay-url "wss://mevedel.skadonk.me"
@@ -88,7 +147,10 @@
               (setq my/mevedel-permission-notify-last (cons body now))
               (notifications-notify
                :title "mevedel needs permission"
-               :body body))))))
+               :body body)))))
+
+  ;; Keep model presets separate from the personal configuration.
+  (load! "mevedel-model-presets"))
 
 ;; Projectile advises `delete-file' to prune its cache, and the advice calls
 ;; `projectile-project-root', which resolves a truename.  On a remote file
@@ -113,10 +175,3 @@
              (> mevedel-transport--depth 0))
         nil
       (funcall fn filename trash))))
-
-
-;; Keep model presets separate from the personal configuration.
-(load (expand-file-name
-       "mevedel-model-presets.el"
-       (file-name-directory (file-truename (or load-file-name buffer-file-name))))
-      nil t)
