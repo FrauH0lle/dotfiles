@@ -11,9 +11,21 @@
 (package! mevedel
   :recipe (:host github
            :repo "FrauH0lle/mevedel"
-           :files ("*.el")
+           :files
+           ("*.el"
+            "agents"
+            "prompts"
+            "skills"
+            "docs"
+            "collaboration"
+            ("shared-editing"
+             "shared-editing/host.bundle.mjs"
+             "shared-editing/resvg.wasm"
+             "shared-editing/font.ttf"
+             "shared-editing/FONT-LICENSE"
+             "shared-editing/THIRD-PARTY-NOTICES.txt"))
            :protocol ssh
            :local-repo "~/Projekte/mevedel"
-           :build (:not compile)
+           ;; :build (:not compile)
            )
   :lockfile tools_llm)
