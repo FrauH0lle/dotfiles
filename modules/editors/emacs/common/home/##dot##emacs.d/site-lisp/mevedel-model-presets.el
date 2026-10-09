@@ -2,14 +2,17 @@
 
 ;;; Commentary:
 
-;; Model teams for mevedel, using the configured Codex and DeepSeek backends.
+;; Model teams for mevedel, using the configured Codex and DeepSeek backends and
+;; mevedel's Claude Code subscription backend. The Codex models are declared in
+;; config.el. Hosts may override the default action preset in config.local.el.
 
 ;;; Code:
 
-;; Make struct setters available when the deferred body is macro-expanded.
-(require 'gptel-request)
-
 (after! mevedel
+
+  ;; Make struct setters available when the deferred body is macro-expanded.
+  (require 'gptel-request)
+
 
   (mevedel-define-preset mevedel-gpt6
     :description "GPT-6: Sol lead and workers, Astra review, Luna exploration"
@@ -43,6 +46,31 @@
     ((goal-review :provider "DeepSeek:deepseek-flash" :effort max)
      (verifier :provider "DeepSeek:deepseek-flash" :effort max)
      (journal :provider "DeepSeek:deepseek-flash" :effort high)))
+
+  (mevedel-define-preset mevedel-claude-code
+    :description "Claude Code: Opus lead, Sonnet workers, Haiku exploration"
+    :parents (mevedel-implement)
+    :backend "Claude Code"
+    :model (plist-get (mevedel-model-resolve-provider "Claude Code:opus") :model)
+    :reasoning-effort 'medium
+    :model-tiers
+    ((fast :provider "Claude Code:haiku" :effort nil)
+     (balanced :provider "Claude Code:sonnet" :effort high)
+     (strong :provider "Claude Code:opus" :effort high))
+    :model-workloads
+    ((planning :tier strong)
+     (plan-implementation :tier balanced)
+     (goal-review :tier strong)
+     (worker :tier balanced)
+     (explorer :tier fast)
+     (verifier :tier balanced)
+     (reviewer :tier strong)
+     (naming :tier fast)
+     (guardian :tier balanced :effort low)
+     (buddy :tier balanced :effort medium)
+     (journal :tier strong :effort low)
+     (memory :tier balanced :effort medium)
+     (summarization :tier balanced :effort medium)))
 
   (setq mevedel-default-chat-preset 'implement)
   (setf (alist-get 'implement mevedel-action-preset-alist) 'mevedel-gpt6))

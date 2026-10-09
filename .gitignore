@@ -2,3 +2,6 @@
 .idea
 *.log
 tmp/
+
+# Emacs secrets (never tracked)
+secrets.el
